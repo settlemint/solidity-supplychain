@@ -1,0 +1,114 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "make build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "make test",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "format",
+      "type": "shell",
+      "command": "make format",
+      "problemMatcher": []
+    },
+    {
+      "label": "snapshot",
+      "type": "shell",
+      "command": "make snapshot",
+      "problemMatcher": []
+    },
+    {
+      "label": "anvil",
+      "type": "shell",
+      "command": "make anvil",
+      "problemMatcher": []
+    },
+    {
+      "label": "deploy-anvil",
+      "type": "shell",
+      "command": "make deploy-anvil",
+      "problemMatcher": []
+    },
+    {
+      "label": "deploy",
+      "type": "shell",
+      "command": "EXTRA_ARGS=\"${input:extra-deployment-verify} ${input:extra-deployment-other}\" make deploy",
+      "problemMatcher": []
+    },
+    {
+      "label": "script-anvil",
+      "type": "shell",
+      "command": "EXTRA_ARGS=\"${input:extra-script-broadcast} ${input:extra-script-other}\" make script-anvil",
+      "problemMatcher": []
+    },
+    {
+      "label": "script",
+      "type": "shell",
+      "command": "EXTRA_ARGS=\"${input:extra-script-broadcast} ${input:extra-script-other}\" make script",
+      "problemMatcher": []
+    },
+    {
+      "label": "cast",
+      "type": "shell",
+      "command": "make cast",
+      "problemMatcher": []
+    },
+    {
+      "label": "subgraph",
+      "type": "shell",
+      "command": "make subgraph",
+      "problemMatcher": []
+    },
+    {
+      "label": "help",
+      "type": "shell",
+      "command": "make help",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "extra-deployment-verify",
+      "description": "Extra deployment options?",
+      "default": "",
+      "type": "pickString",
+      "options": [
+        "",
+        "--verify --verifier sourcify",
+        "--verify --verifier etherscan --etherscan-api-key ${ETHERSCAN_API_KEY}"
+      ]
+    },
+    {
+      "id": "extra-deployment-other",
+      "description": "Other extra deployment options?",
+      "default": "",
+      "type": "promptString"
+    },
+    {
+      "id": "extra-script-broadcast",
+      "description": "Broadcast?",
+      "default": "",
+      "type": "pickString",
+      "options": ["", "--broadcast"]
+    },
+    {
+      "id": "extra-script-other",
+      "description": "Other extra script options?",
+      "default": "",
+      "type": "promptString"
+    }
+  ]
+}

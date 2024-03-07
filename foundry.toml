@@ -1,0 +1,31 @@
+[profile.ci]
+  fuzz = { runs = 10_000 }
+  verbosity = 4
+
+[fmt]
+  bracket_spacing = true
+  int_types = "long"
+  line_length = 120
+  multiline_func_header = "all"
+  number_underscore = "thousands"
+  quote_style = "double"
+  tab_width = 4
+  wrap_comments = true
+
+[rpc_endpoints]
+anvil = "http://localhost:8545"
+btp = "${BTP_RPC_URL}"
+
+[profile.default]
+  src = "src"
+  test = "test"
+  out = "out"
+  libs = ["lib"]
+  solc = "0.8.24"
+  optimizer = true
+  optimizer_runs = 10_000
+  gas_reports = ["*"]
+  fuzz = { runs = 1_000 }
+  auto_detect_solc = false
+  extra_output_files = [ "metadata" ]
+  fs_permissions = [{ access = "read", path = "./deployment-anvil.txt"}, { access = "read", path = "./deployment.txt"} ]

@@ -1,0 +1,24 @@
+# Compiler files
+cache/
+out/
+
+# Ignores development broadcast logs
+!/broadcast
+/broadcast/*/31337/
+/broadcast/**/dry-run/
+
+# Docs
+docs/
+
+# Dotenv file
+.env
+
+# Subgraphs
+deployment.txt
+deployment-anvil.txt
+subgraph/subgraph.config.json
+subgraph/node_modules
+subgraph/generated
+subgraph/build
+
+.pnpm
