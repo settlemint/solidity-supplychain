@@ -1,6 +1,6 @@
-# ERC20
+# Example SupplyChain
 
-A basic ERC20 token contract.
+A basic Supplychain contract.
 
 ## Get started
 

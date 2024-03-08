@@ -1,0 +1,12 @@
+{
+    "output": "generated/solidity-supplychain.",
+    "chain": "localhost",
+    "datasources": [
+      {
+        "name": "ExampleSupplyChain.sol",
+        "address": "0x0000000000000000000000000000000000000000",
+        "startBlock": 0,
+        "module": ["ownable", "supplychain"]
+    }
+    ]
+  }

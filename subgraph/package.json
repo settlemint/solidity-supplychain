@@ -1,0 +1,19 @@
+{
+    "name": "solidity-supplychain",
+    "version": "7.0.0",
+    "description": "Solidity Supplychain",
+    "scripts": {},
+    "keywords": [
+      "solidity",
+      "subgraph"
+    ],
+    "author": "SettleMint <hello@settlemint.com>",
+    "license": "MIT",
+    "dependencies": {
+      "@amxx/graphprotocol-utils": "^1.1.0",
+      "@graphprotocol/graph-cli": "^0.68.5",
+      "@graphprotocol/graph-ts": "^0.33.0",
+      "@openzeppelin/contracts": "^5.0.2",
+      "@openzeppelin/subgraphs": "0.1.8-5"
+    }
+  }
