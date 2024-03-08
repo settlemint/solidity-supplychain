@@ -1,0 +1,66 @@
+[
+    {
+      "name": "Lot",
+      "fields": [
+        { "name": "id", "type": "ID!" },
+        { "name": "lotType", "type": "String" },
+        { "name": "quantity", "type": "String" },
+        { "name": "operatorId", "type": "String" },
+        { "name": "originId", "type": "String" },
+        { "name": "lotNo", "type": "String" },
+        { "name": "transporterId", "type": "String" },
+        { "name": "lotToFirstProcessMap", "type": "FirstProcess" }
+      ]
+    },
+    {
+      "name": "FirstProcess",
+      "fields": [
+        { "name": "id", "type": "ID!" },
+        { "name": "firstProcessLotId", "type": "String" },
+        { "name": "secondProcessMap", "type": "SecondProcess" },
+        { "name": "lotNos", "type": "String" },
+        { "name": "operatorId", "type": "String" },
+        { "name": "machineId", "type": "String" },
+        { "name": "processingHouseId", "type": "String" },
+        { "name": "lotToFirstProcessMap", "type": "Lot!", "derived": "lotToFirstProcessMap" }
+      ]
+    },
+    {
+      "name": "SecondProcess",
+      "fields": [
+        { "name": "id", "type": "ID!" },
+        { "name": "firstProcessLotIds", "type": "String" },
+        { "name": "machineId", "type": "String" },
+        { "name": "operatorId", "type": "String" },
+        { "name": "secondProcessLotId", "type": "String" },
+        { "name": "secondProcessMap", "type": "FirstProcess!", "derived": "secondProcessMap" },
+        { "name": "secondProcessToPackingMap", "type": "Packing!", "derived": "secondProcessToPackingMap" }
+      ]
+    },
+    {
+      "name": "Packing",
+      "fields": [
+        { "name": "id", "type": "ID!" },
+        { "name": "packingLotId", "type": "String" },
+        { "name": "secondProcessLotId", "type": "String" },
+        { "name": "secondProcessToPackingMap", "type": "SecondProcess" },
+        { "name": "operatorId", "type": "String" },
+        { "name": "packageId", "type": "String" },
+        { "name": "weight", "type": "String" },
+        { "name": "packagingType", "type": "String" },
+        { "name": "packingToTransportMap", "type": "Transport" }
+      ]
+    },
+    {
+      "name": "Transport",
+      "fields": [
+        { "name": "id", "type": "ID!" },
+        { "name": "transportLotId", "type": "String" },
+        { "name": "packageId", "type": "String" },
+        { "name": "operatorId", "type": "String" },
+        { "name": "transporterId", "type": "String" },
+        { "name": "cartonId", "type": "String" },
+        { "name": "packingToTransportMap", "type": "Packing!", "derived": "packingToTransportMap" }
+      ]
+    }
+  ]
