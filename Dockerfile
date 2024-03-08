@@ -8,9 +8,12 @@ WORKDIR /
 
 RUN git config --global user.email "hello@settlemint.com" && \
   git config --global user.name "SettleMint" && \
-  forge init usecase --template settlemint/solidity-empty && \
+  forge init usecase --template settlemint/solidity-supplychain && \
   cd usecase && \
   forge build
+
+RUN cd usecase/subgraph && \
+  npm install
 
 USER root
 
