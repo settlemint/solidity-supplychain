@@ -1,6 +1,6 @@
 # Makefile for Foundry Ethereum Development Toolkit
 
-.PHONY: build test format snapshot anvil deploy deploy-anvil cast help subgraph
+.PHONY: build test format snapshot anvil deploy deploy-anvil cast help subgraph clear_anvil_port
 
 build:
 	@echo "Building with Forge..."
@@ -20,6 +20,7 @@ snapshot:
 
 anvil:
 	@echo "Starting Anvil local Ethereum node..."
+	@make clear_anvil_port
 	@anvil
 
 deploy-anvil:
@@ -93,3 +94,6 @@ help:
 	@anvil --help
 	@echo "Cast help..."
 	@cast --help
+
+clear_anvil_port:
+	-fuser -k -n tcp 8545
