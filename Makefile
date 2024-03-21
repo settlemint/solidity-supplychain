@@ -26,23 +26,23 @@ deploy-anvil:
 	@echo "Deploying with Forge to Anvil..."
 	@forge create ./src/ExampleSupplyChain.sol:ExampleSupplyChain --rpc-url anvil --interactive | tee deployment-anvil.txt
 
-deploy:
+deploy-btp:
 	@eval $$(curl -H "x-auth-token: $${BTP_SERVICE_TOKEN}" -s $${BTP_CLUSTER_MANAGER_URL}/ide/foundry/$${BTP_SCS_ID}/env | sed 's/^/export /'); \
-	if [ -z "$${BTP_FROM}" ]; then \
+	args=""; \
+	if [ ! -z "$${BTP_FROM}" ]; then \
+		args="--unlocked --from $${BTP_FROM}"; \
+	else \
 		echo "\033[1;33mWARNING: No keys are activated on the node, falling back to interactive mode...\033[0m"; \
 		echo ""; \
-		if [ -z "$${BTP_GAS_PRICE}" ]; then \
-			forge create ./src/ExampleSupplyChain.sol:ExampleSupplyChain $${EXTRA_ARGS} --rpc-url $${BTP_RPC_URL} --interactive | tee deployment.txt; \
-		else \
-			forge create ./src/ExampleSupplyChain.sol:ExampleSupplyChain $${EXTRA_ARGS} --rpc-url $${BTP_RPC_URL} --interactive --gas-price $${BTP_GAS_PRICE} | tee deployment.txt; \
-		fi; \
-	else \
-		if [ -z "$${BTP_GAS_PRICE}" ]; then \
-			forge create ./src/ExampleSupplyChain.sol:ExampleSupplyChain $${EXTRA_ARGS} --rpc-url $${BTP_RPC_URL} --unlocked --from $${BTP_FROM} | tee deployment.txt; \
-		else \
-			forge create ./src/ExampleSupplyChain.sol:ExampleSupplyChain $${EXTRA_ARGS} --rpc-url $${BTP_RPC_URL} --unlocked --from $${BTP_FROM} --gas-price $${BTP_GAS_PRICE} | tee deployment.txt; \
-		fi; \
-	fi
+		args="--interactive"; \
+	fi; \
+	if [ ! -z "$${BTP_GAS_PRICE}" ]; then \
+		args="$$args --gas-price $${BTP_GAS_PRICE}"; \
+	fi; \
+	if [ "$${BTP_EIP_1559_ENABLED}" = "false" ]; then \
+		args="$$args --legacy"; \
+	fi; \
+	forge create ./src/ExampleSupplyChain.sol:ExampleSupplyChain $${EXTRA_ARGS} --rpc-url $${BTP_RPC_URL} $$args | tee deployment.txt
 
 script-anvil:
 	@if [ ! -f deployment-anvil.txt ]; then \
@@ -52,8 +52,8 @@ script-anvil:
 	@DEPLOYED_ADDRESS=$$(grep "Deployed to:" deployment-anvil.txt | awk '{print $$3}') forge script script/ExampleSupplyChain.sol:ExampleSupplyChain ${EXTRA_ARGS} --rpc-url anvil -i=1
 
 script:
-	@if [ ! -f deployment-anvil.txt ]; then \
-		echo "\033[1;31mERROR: Contract was not deployed or the deployment-anvil.txt went missing.\033[0m"; \
+	@if [ ! -f deployment.txt ]; then \
+		echo "\033[1;31mERROR: Contract was not deployed or the deployment.txt went missing.\033[0m"; \
 		exit 1; \
 	fi
 	@eval $$(curl -H "x-auth-token: $${BTP_SERVICE_TOKEN}" -s $${BTP_CLUSTER_MANAGER_URL}/ide/foundry/$${BTP_SCS_ID}/env | sed 's/^/export /')
@@ -64,10 +64,6 @@ script:
 	else \
 		@DEPLOYED_ADDRESS=$$(grep "Deployed to:" deployment.txt | awk '{print $$3}') forge script script/ExampleSupplyChain.sol:ExampleSupplyChain ${EXTRA_ARGS} --rpc-url ${BTP_RPC_URL} --unlocked; \
 	fi
-
-cast:
-	@echo "Interacting with EVM via Cast..."
-	@cast $(SUBCOMMAND)
 
 subgraph:
 	@echo "Deploying the subgraph..."
