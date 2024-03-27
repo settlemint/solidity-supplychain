@@ -1,4 +1,4 @@
-FROM node:20.11.1-bookworm as build
+FROM node:20.12.0-bookworm as build
 
 ENV FOUNDRY_DIR /usr/local
 RUN curl -L https://foundry.paradigm.xyz | bash && \
