@@ -17,7 +17,7 @@ RUN cd usecase/subgraph && \
 
 USER root
 
-FROM busybox
+FROM cgr.dev/chainguard/busybox:latest
 
 COPY --from=build /usecase /usecase
 COPY --from=build /root/.svm /usecase-svm
