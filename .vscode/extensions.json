@@ -1,16 +1,11 @@
 {
   "recommendations": [
     "nomicfoundation.hardhat-solidity",
-    "miguelsolorio.fluent-icons",
-    "vscode-icons-team.vscode-icons",
     "genieai.chatgpt-vscode",
     "esbenp.prettier-vscode",
     "dracula-theme.theme-dracula",
-    "cnshenj.vscode-task-manager"
+    "cnshenj.vscode-task-manager",
+    "catppuccin.catppuccin-vsc-icons",
+    "catppuccin.catppuccin-vsc"
   ]
 }
-
-
-
-
-
