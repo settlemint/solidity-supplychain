@@ -1,5 +1,23 @@
+node_modules
+.env
+
+# Hardhat files
+/cache
+/artifacts
+
+# TypeChain files
+/typechain
+/typechain-types
+
+# solidity-coverage files
+/coverage
+/coverage.json
+
+# Hardhat Ignition default folder for deployments against a local node
+ignition/deployments/
+
 # Compiler files
-cache/
+cache_forge/
 out/
 
 # Ignores development broadcast logs
@@ -14,12 +32,7 @@ docs/
 .env
 
 # Subgraphs
-deployment.txt
-deployment-anvil.txt
-subgraph/subgraph.config.json
-subgraph/node_modules
-subgraph/generated
-subgraph/build
-node_modules/
+generated
+build
 
 .pnpm

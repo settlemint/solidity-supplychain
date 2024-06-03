@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity 0.8.26;
 
 import "forge-std/Test.sol";
-import "../src/ExampleSupplyChain.sol";
+import "../contracts/ExampleSupplyChain.sol";
 
 contract ExampleSupplyChainTest is Test {
     ExampleSupplyChain supplyChain;
@@ -124,4 +124,34 @@ contract ExampleSupplyChainTest is Test {
             packagingType
         );
     }
+
+    function testTransportEmitsEvent() public {
+        // Declare variables for the expected event parameters
+        string memory packageId = "Package1";
+        string memory operatorId = "Operator123";
+        string memory transporterId = "TransporterABC";
+        string memory cartonId = "Carton456";
+
+        // We expect the TransportEvent to be emitted with specific parameters
+        vm.expectEmit(true, true, true, true);
+
+        // Emit the expected event from the contract instance
+        emit ExampleSupplyChain.TransportEvent(
+            packageId,
+            operatorId,
+            transporterId,
+            cartonId,
+            "1" // Assuming transportLotId is "1" in this case
+        );
+
+        // Call the function that should emit the event
+        supplyChain.transport(
+            packageId,
+            operatorId,
+            transporterId,
+            cartonId
+        );
+    }
+
+
 }
