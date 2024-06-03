@@ -1,0 +1,505 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ExampleSupplyChain",
+  "sourceName": "contracts/ExampleSupplyChain.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableInvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "lotType",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "quantity",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "operatorId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "originId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "lotNo",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "transporterId",
+          "type": "string"
+        }
+      ],
+      "name": "CreateLotEvent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "lotNos",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "operatorId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "machineId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "processingHouseId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "timestamp",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "firstProcessLotId",
+          "type": "string"
+        }
+      ],
+      "name": "FirstProcessEvent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "secondProcessLotId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "operatorId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "packageId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "weight",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "packagingType",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "packingLotId",
+          "type": "string"
+        }
+      ],
+      "name": "PackagingEvent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "firstProcessLotIds",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "machineId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "operatorId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "secondProcessOutputLotId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "secondProcessLotId",
+          "type": "string"
+        }
+      ],
+      "name": "SecondProcessEvent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "packageId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "operatorId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "transporterId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "cartonId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "transportLotId",
+          "type": "string"
+        }
+      ],
+      "name": "TransportEvent",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "_firstProcessLotId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "_packingLotId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "_secondProcessLotId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "_transportLotId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "lotType",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "quantity",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "operatorId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "originId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "lotNo",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "transporterId",
+          "type": "string"
+        }
+      ],
+      "name": "createLot",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "secondProcessLotId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "operatorId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "packageId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "weight",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "packagingType",
+          "type": "string"
+        }
+      ],
+      "name": "packing",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "lotNos",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "operatorId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "machineId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "processingHouseId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "timestamp",
+          "type": "string"
+        }
+      ],
+      "name": "registerFirstProcess",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "firstProcessLotIds",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "machineId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "operatorId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "secondProcessOutputLotId",
+          "type": "string"
+        }
+      ],
+      "name": "registerSecondProcess",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "packageId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "operatorId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "transporterId",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "cartonId",
+          "type": "string"
+        }
+      ],
+      "name": "transport",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b503380603557604051631e4fbdf760e01b81526000600482015260240160405180910390fd5b603c816041565b506091565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b610c09806100a06000396000f3fe608060405234801561001057600080fd5b50600436106100d45760003560e01c8063ad2f19f311610081578063e5dbd1ae1161005b578063e5dbd1ae14610185578063f2fde38b14610198578063f342554c146101ab57600080fd5b8063ad2f19f31461014c578063c57397ec1461015f578063e32328101461017257600080fd5b80637b844d86116100b25780637b844d86146101085780638da5cb5b14610111578063ac366bc61461013957600080fd5b806334687fc5146100d9578063386a0d26146100f5578063715018a6146100fe575b600080fd5b6100e260015481565b6040519081526020015b60405180910390f35b6100e260025481565b6101066101b4565b005b6100e260035481565b60005460405173ffffffffffffffffffffffffffffffffffffffff90911681526020016100ec565b610106610147366004610747565b6101c8565b61010661015a366004610807565b610231565b61010661016d3660046108f3565b61029c565b610106610180366004610807565b6102e5565b610106610193366004610747565b610330565b6101066101a6366004610a09565b61037a565b6100e260045481565b6101bc6103e3565b6101c66000610436565b565b6001600460008282546101db9190610a46565b925050819055507f5a6ec825b52239f3c530cc18dca698150d270962d2021703403dcd6815b1af61848484846102126004546104ab565b604051610223959493929190610ae4565b60405180910390a150505050565b60018060008282546102439190610a46565b925050819055507fd494bd9dcaeef0e3e0fd19a0b13af05abf8ca5ffd5e70724ed987b2fcfa443d3858585858561027b6001546104ab565b60405161028d96959493929190610b51565b60405180910390a15050505050565b7f8982a390c0fb1688e369d1ab91e529cae84e472205007ac93be646ec121f94108686868686866040516102d596959493929190610b51565b60405180910390a1505050505050565b6001600360008282546102f89190610a46565b925050819055507fc779766e64dba61c56c17693faa61ae802bcdc203a1479bfb4970edd3ab7e64f858585858561027b6003546104ab565b6001600260008282546103439190610a46565b925050819055507f14b6c7296a7ef1f1d61274d04d7364309a7a32fbb21087fb4c15a5d1534ac899848484846102126002546104ab565b6103826103e3565b73ffffffffffffffffffffffffffffffffffffffff81166103d7576040517f1e4fbdf7000000000000000000000000000000000000000000000000000000008152600060048201526024015b60405180910390fd5b6103e081610436565b50565b60005473ffffffffffffffffffffffffffffffffffffffff1633146101c6576040517f118cdaa70000000000000000000000000000000000000000000000000000000081523360048201526024016103ce565b6000805473ffffffffffffffffffffffffffffffffffffffff8381167fffffffffffffffffffffffff0000000000000000000000000000000000000000831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b606060006104b883610569565b600101905060008167ffffffffffffffff8111156104d8576104d861064c565b6040519080825280601f01601f191660200182016040528015610502576020820181803683370190505b5090508181016020015b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff017f3031323334353637383961626364656600000000000000000000000000000000600a86061a8153600a850494508461050c57509392505050565b6000807a184f03e93ff9f4daa797ed6e38ed64bf6a1f01000000000000000083106105b2577a184f03e93ff9f4daa797ed6e38ed64bf6a1f010000000000000000830492506040015b6d04ee2d6d415b85acef810000000083106105de576d04ee2d6d415b85acef8100000000830492506020015b662386f26fc1000083106105fc57662386f26fc10000830492506010015b6305f5e1008310610614576305f5e100830492506008015b612710831061062857612710830492506004015b6064831061063a576064830492506002015b600a8310610646576001015b92915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b600082601f83011261068c57600080fd5b813567ffffffffffffffff8111156106a6576106a661064c565b6040517fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0603f7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f8501160116810181811067ffffffffffffffff821117156107125761071261064c565b60405281815283820160200185101561072a57600080fd5b816020850160208301376000918101602001919091529392505050565b6000806000806080858703121561075d57600080fd5b843567ffffffffffffffff81111561077457600080fd5b6107808782880161067b565b945050602085013567ffffffffffffffff81111561079d57600080fd5b6107a98782880161067b565b935050604085013567ffffffffffffffff8111156107c657600080fd5b6107d28782880161067b565b925050606085013567ffffffffffffffff8111156107ef57600080fd5b6107fb8782880161067b565b91505092959194509250565b600080600080600060a0868803121561081f57600080fd5b853567ffffffffffffffff81111561083657600080fd5b6108428882890161067b565b955050602086013567ffffffffffffffff81111561085f57600080fd5b61086b8882890161067b565b945050604086013567ffffffffffffffff81111561088857600080fd5b6108948882890161067b565b935050606086013567ffffffffffffffff8111156108b157600080fd5b6108bd8882890161067b565b925050608086013567ffffffffffffffff8111156108da57600080fd5b6108e68882890161067b565b9150509295509295909350565b60008060008060008060c0878903121561090c57600080fd5b863567ffffffffffffffff81111561092357600080fd5b61092f89828a0161067b565b965050602087013567ffffffffffffffff81111561094c57600080fd5b61095889828a0161067b565b955050604087013567ffffffffffffffff81111561097557600080fd5b61098189828a0161067b565b945050606087013567ffffffffffffffff81111561099e57600080fd5b6109aa89828a0161067b565b935050608087013567ffffffffffffffff8111156109c757600080fd5b6109d389828a0161067b565b92505060a087013567ffffffffffffffff8111156109f057600080fd5b6109fc89828a0161067b565b9150509295509295509295565b600060208284031215610a1b57600080fd5b813573ffffffffffffffffffffffffffffffffffffffff81168114610a3f57600080fd5b9392505050565b80820180821115610646577f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b6000815180845260005b81811015610aa657602081850181015186830182015201610a8a565b5060006020828601015260207fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f83011685010191505092915050565b60a081526000610af760a0830188610a80565b8281036020840152610b098188610a80565b90508281036040840152610b1d8187610a80565b90508281036060840152610b318186610a80565b90508281036080840152610b458185610a80565b98975050505050505050565b60c081526000610b6460c0830189610a80565b8281036020840152610b768189610a80565b90508281036040840152610b8a8188610a80565b90508281036060840152610b9e8187610a80565b90508281036080840152610bb28186610a80565b905082810360a0840152610bc68185610a80565b999850505050505050505056fea264697066735822122082c23d1191b29394075afc2721c46d318240c296857e2681b52bb973e3b30fcd64736f6c634300081a0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100d45760003560e01c8063ad2f19f311610081578063e5dbd1ae1161005b578063e5dbd1ae14610185578063f2fde38b14610198578063f342554c146101ab57600080fd5b8063ad2f19f31461014c578063c57397ec1461015f578063e32328101461017257600080fd5b80637b844d86116100b25780637b844d86146101085780638da5cb5b14610111578063ac366bc61461013957600080fd5b806334687fc5146100d9578063386a0d26146100f5578063715018a6146100fe575b600080fd5b6100e260015481565b6040519081526020015b60405180910390f35b6100e260025481565b6101066101b4565b005b6100e260035481565b60005460405173ffffffffffffffffffffffffffffffffffffffff90911681526020016100ec565b610106610147366004610747565b6101c8565b61010661015a366004610807565b610231565b61010661016d3660046108f3565b61029c565b610106610180366004610807565b6102e5565b610106610193366004610747565b610330565b6101066101a6366004610a09565b61037a565b6100e260045481565b6101bc6103e3565b6101c66000610436565b565b6001600460008282546101db9190610a46565b925050819055507f5a6ec825b52239f3c530cc18dca698150d270962d2021703403dcd6815b1af61848484846102126004546104ab565b604051610223959493929190610ae4565b60405180910390a150505050565b60018060008282546102439190610a46565b925050819055507fd494bd9dcaeef0e3e0fd19a0b13af05abf8ca5ffd5e70724ed987b2fcfa443d3858585858561027b6001546104ab565b60405161028d96959493929190610b51565b60405180910390a15050505050565b7f8982a390c0fb1688e369d1ab91e529cae84e472205007ac93be646ec121f94108686868686866040516102d596959493929190610b51565b60405180910390a1505050505050565b6001600360008282546102f89190610a46565b925050819055507fc779766e64dba61c56c17693faa61ae802bcdc203a1479bfb4970edd3ab7e64f858585858561027b6003546104ab565b6001600260008282546103439190610a46565b925050819055507f14b6c7296a7ef1f1d61274d04d7364309a7a32fbb21087fb4c15a5d1534ac899848484846102126002546104ab565b6103826103e3565b73ffffffffffffffffffffffffffffffffffffffff81166103d7576040517f1e4fbdf7000000000000000000000000000000000000000000000000000000008152600060048201526024015b60405180910390fd5b6103e081610436565b50565b60005473ffffffffffffffffffffffffffffffffffffffff1633146101c6576040517f118cdaa70000000000000000000000000000000000000000000000000000000081523360048201526024016103ce565b6000805473ffffffffffffffffffffffffffffffffffffffff8381167fffffffffffffffffffffffff0000000000000000000000000000000000000000831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b606060006104b883610569565b600101905060008167ffffffffffffffff8111156104d8576104d861064c565b6040519080825280601f01601f191660200182016040528015610502576020820181803683370190505b5090508181016020015b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff017f3031323334353637383961626364656600000000000000000000000000000000600a86061a8153600a850494508461050c57509392505050565b6000807a184f03e93ff9f4daa797ed6e38ed64bf6a1f01000000000000000083106105b2577a184f03e93ff9f4daa797ed6e38ed64bf6a1f010000000000000000830492506040015b6d04ee2d6d415b85acef810000000083106105de576d04ee2d6d415b85acef8100000000830492506020015b662386f26fc1000083106105fc57662386f26fc10000830492506010015b6305f5e1008310610614576305f5e100830492506008015b612710831061062857612710830492506004015b6064831061063a576064830492506002015b600a8310610646576001015b92915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b600082601f83011261068c57600080fd5b813567ffffffffffffffff8111156106a6576106a661064c565b6040517fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0603f7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f8501160116810181811067ffffffffffffffff821117156107125761071261064c565b60405281815283820160200185101561072a57600080fd5b816020850160208301376000918101602001919091529392505050565b6000806000806080858703121561075d57600080fd5b843567ffffffffffffffff81111561077457600080fd5b6107808782880161067b565b945050602085013567ffffffffffffffff81111561079d57600080fd5b6107a98782880161067b565b935050604085013567ffffffffffffffff8111156107c657600080fd5b6107d28782880161067b565b925050606085013567ffffffffffffffff8111156107ef57600080fd5b6107fb8782880161067b565b91505092959194509250565b600080600080600060a0868803121561081f57600080fd5b853567ffffffffffffffff81111561083657600080fd5b6108428882890161067b565b955050602086013567ffffffffffffffff81111561085f57600080fd5b61086b8882890161067b565b945050604086013567ffffffffffffffff81111561088857600080fd5b6108948882890161067b565b935050606086013567ffffffffffffffff8111156108b157600080fd5b6108bd8882890161067b565b925050608086013567ffffffffffffffff8111156108da57600080fd5b6108e68882890161067b565b9150509295509295909350565b60008060008060008060c0878903121561090c57600080fd5b863567ffffffffffffffff81111561092357600080fd5b61092f89828a0161067b565b965050602087013567ffffffffffffffff81111561094c57600080fd5b61095889828a0161067b565b955050604087013567ffffffffffffffff81111561097557600080fd5b61098189828a0161067b565b945050606087013567ffffffffffffffff81111561099e57600080fd5b6109aa89828a0161067b565b935050608087013567ffffffffffffffff8111156109c757600080fd5b6109d389828a0161067b565b92505060a087013567ffffffffffffffff8111156109f057600080fd5b6109fc89828a0161067b565b9150509295509295509295565b600060208284031215610a1b57600080fd5b813573ffffffffffffffffffffffffffffffffffffffff81168114610a3f57600080fd5b9392505050565b80820180821115610646577f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b6000815180845260005b81811015610aa657602081850181015186830182015201610a8a565b5060006020828601015260207fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f83011685010191505092915050565b60a081526000610af760a0830188610a80565b8281036020840152610b098188610a80565b90508281036040840152610b1d8187610a80565b90508281036060840152610b318186610a80565b90508281036080840152610b458185610a80565b98975050505050505050565b60c081526000610b6460c0830189610a80565b8281036020840152610b768189610a80565b90508281036040840152610b8a8188610a80565b90508281036060840152610b9e8187610a80565b90508281036080840152610bb28186610a80565b905082810360a0840152610bc68185610a80565b999850505050505050505056fea264697066735822122082c23d1191b29394075afc2721c46d318240c296857e2681b52bb973e3b30fcd64736f6c634300081a0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
