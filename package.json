@@ -1,7 +1,7 @@
 {
-  "name": "solidity-empty",
+  "name": "solidity-supplychain",
   "version": "7.0.0",
-  "description": "Solidity Empty",
+  "description": "Solidity supplychain",
   "keywords": [
     "solidity",
     "subgraph"
