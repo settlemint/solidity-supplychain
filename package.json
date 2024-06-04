@@ -1,0 +1,28 @@
+{
+  "name": "solidity-erc20-metatx",
+  "version": "7.0.0",
+  "description": "Solidity ERC20 with Meta tx",
+  "keywords": [
+    "solidity",
+    "subgraph"
+  ],
+  "author": "SettleMint <hello@settlemint.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@amxx/graphprotocol-utils": "1.1.0",
+    "@graphprotocol/graph-cli": "0.73.0",
+    "@graphprotocol/graph-ts": "0.35.1",
+    "@nomicfoundation/hardhat-foundry": "1.1.2",
+    "@nomicfoundation/hardhat-ignition-viem": "0.15.4",
+    "@nomicfoundation/hardhat-toolbox-viem": "3.0.0",
+    "@nomiclabs/hardhat-solhint": "3.1.0",
+    "@openzeppelin/contracts": "5.0.2",
+    "@openzeppelin/subgraphs": "0.1.8-5",
+    "hardhat": "2.22.4",
+    "solhint": "5.0.1"
+  },
+  "overrides": {
+    "@graphprotocol/graph-cli": "0.73.0",
+    "@graphprotocol/graph-ts": "0.35.1"
+  }
+}
