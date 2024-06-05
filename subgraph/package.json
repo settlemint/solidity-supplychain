@@ -11,7 +11,7 @@
     "license": "MIT",
     "dependencies": {
       "@amxx/graphprotocol-utils": "1.1.0",
-      "@graphprotocol/graph-cli": "0.72.2",
+      "@graphprotocol/graph-cli": "0.73.0",
       "@graphprotocol/graph-ts": "0.35.1",
       "@openzeppelin/contracts": "5.0.2",
       "@openzeppelin/subgraphs": "0.1.8-5"
