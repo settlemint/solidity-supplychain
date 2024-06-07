@@ -13,15 +13,16 @@
   wrap_comments = true
 
 [rpc_endpoints]
-anvil = "http://localhost:8545"
-btp = "${BTP_RPC_URL}"
+  anvil = "http://localhost:8545"
+  btp = "${BTP_RPC_URL}"
 
 [profile.default]
-  src = "src"
-  test = "test"
-  out = "out"
-  libs = ["lib"]
-  solc = "0.8.24"
+  src = 'contracts'
+  out = 'out'
+  libs = ['lib']
+  test = 'test'
+  cache_path  = 'cache_forge'
+  solc = "0.8.26"
   optimizer = true
   optimizer_runs = 10_000
   gas_reports = ["*"]

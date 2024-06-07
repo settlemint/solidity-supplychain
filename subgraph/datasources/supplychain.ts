@@ -1,4 +1,4 @@
-import { FirstProcess, Lot, Packing, SecondProcess, Transport } from '../generated/schema';
+import { FirstProcess, Lot, Packing, SecondProcess, Transport } from '../../generated/schema';
 
 import {
     CreateLotEvent,
@@ -6,7 +6,7 @@ import {
     PackagingEvent,
     SecondProcessEvent,
     TransportEvent,
-  } from '../generated/supplychain/ExampleSupplyChain';
+  } from '../../generated/supplychain/ExampleSupplyChain';
 
 export function handleCreateLot(event: CreateLotEvent): void {
   const evt = new Lot(event.params.lotNo);

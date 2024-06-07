@@ -13,7 +13,7 @@
         - Roast
       abis:
         - name: ExampleSupplyChain
-          file: {root}/../out/ExampleSupplyChain.sol/ExampleSupplyChain.json
+          file: {root}/out/ExampleSupplyChain.sol/ExampleSupplyChain.json
       eventHandlers:
         - event: CreateLotEvent(string,string,string,string,string,string)
           handler: handleCreateLot

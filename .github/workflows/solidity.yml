@@ -1,0 +1,42 @@
+name: Branch
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  id-token: write
+  issues: write
+  discussions: write
+  packages: write
+  pages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
+
+jobs:
+  ci:
+    name: CI
+    uses: settlemint/smart-contracts-actions/.github/workflows/solidity.yml@main
+    secrets:
+      TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    with:
+      docker-image-name: solidity-supplychain
+      runs-on: solidity-supplychain
+      ignition-module: 'ignition/modules/ExampleSupplyChainModule.ts'
+      subgraph-contract-address-key: 'ExampleSupplyChainModule#ExampleSupplyChain'  
