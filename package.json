@@ -10,7 +10,7 @@
   "license": "MIT",
   "devDependencies": {
     "@amxx/graphprotocol-utils": "1.1.0",
-    "@graphprotocol/graph-cli": "0.74.0",
+    "@graphprotocol/graph-cli": "0.74.1",
     "@graphprotocol/graph-ts": "0.35.1",
     "@nomicfoundation/hardhat-foundry": "1.1.2",
     "@nomicfoundation/hardhat-ignition-viem": "0.15.4",
@@ -22,7 +22,7 @@
     "solhint": "5.0.1"
   },
   "overrides": {
-    "@graphprotocol/graph-cli": "0.74.0",
+    "@graphprotocol/graph-cli": "0.74.1",
     "@graphprotocol/graph-ts": "0.35.1"
   }
 }
