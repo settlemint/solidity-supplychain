@@ -53,18 +53,18 @@
       "type": "shell",
       "command": "btp-scs hardhat network",
       "problemMatcher": [],
-      "isBackground": true
+      "isBackground": true,
     },
     {
       "label": "Hardhat - Deploy to local network",
       "type": "shell",
-      "command": "btp-scs hardhat deploy local -m ${input:deployment-module}",
+      "command": "btp-scs hardhat deploy local -m ${input:deployment-module} ${input:extra-deployment}",
       "problemMatcher": []
     },
     {
       "label": "Hardhat - Deploy to platform network",
       "type": "shell",
-      "command": "btp-scs hardhat deploy remote -m ${input:deployment-module}",
+      "command": "btp-scs hardhat deploy remote -m ${input:deployment-module} ${input:extra-deployment}",
       "problemMatcher": []
     },
     {
@@ -80,6 +80,12 @@
       "description": "Hardhat Ignition Module",
       "type": "promptString",
       "default": "ignition/modules/ExampleSupplyChainModule.ts"
-    }
+    },
+    {
+      "id": "extra-deployment",
+      "description": "Extra commandline arguments, [--verify] [--reset]",
+      "type": "promptString",
+      "default": ""
+    },
   ]
 }
