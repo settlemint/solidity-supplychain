@@ -20,6 +20,12 @@ const config: HardhatUserConfig = {
       gasPrice: process.env.BTP_GAS_PRICE ? parseInt(process.env.BTP_GAS_PRICE) : "auto",
     },
   },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
+  },
+  sourcify: {
+    enabled: true,
+  }
 };
 
 export default config;
