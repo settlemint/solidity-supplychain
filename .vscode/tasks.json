@@ -1,5 +1,19 @@
 {
   "version": "2.0.0",
+  "inputs": [
+    {
+      "id": "deployment-module",
+      "description": "Hardhat Ignition Module",
+      "type": "promptString",
+      "default": "ignition/modules/ExampleSupplyChainModule.ts"
+    },
+    {
+      "id": "extra-deployment",
+      "description": "Extra commandline arguments, e.g. --verify",
+      "type": "promptString",
+      "default": ""
+    },
+  ],
   "tasks": [
     {
       "label": "Foundry - Build",
@@ -58,13 +72,25 @@
     {
       "label": "Hardhat - Deploy to local network",
       "type": "shell",
-      "command": "btp-scs hardhat deploy local -m ${input:deployment-module} ${input:extra-deployment}",
+      "command": "btp-scs hardhat deploy local ${input:extra-deployment} -m ${input:deployment-module}",
+      "problemMatcher": []
+    },
+    {
+      "label": "Hardhat - Reset & Deploy to local network",
+      "type": "shell",
+      "command": "btp-scs hardhat deploy local --reset ${input:extra-deployment} -m ${input:deployment-module}",
       "problemMatcher": []
     },
     {
       "label": "Hardhat - Deploy to platform network",
       "type": "shell",
-      "command": "btp-scs hardhat deploy remote -m ${input:deployment-module} ${input:extra-deployment}",
+      "command": "btp-scs hardhat deploy remote ${input:extra-deployment} -m ${input:deployment-module}",
+      "problemMatcher": []
+    },
+    {
+      "label": "Hardhat - Reset & Deploy to platform network",
+      "type": "shell",
+      "command": "btp-scs hardhat deploy remote --reset ${input:extra-deployment} -m ${input:deployment-module}",
       "problemMatcher": []
     },
     {
@@ -74,18 +100,4 @@
       "problemMatcher": []
     }
   ],
-  "inputs": [
-    {
-      "id": "deployment-module",
-      "description": "Hardhat Ignition Module",
-      "type": "promptString",
-      "default": "ignition/modules/ExampleSupplyChainModule.ts"
-    },
-    {
-      "id": "extra-deployment",
-      "description": "Extra commandline arguments, [--verify] [--reset]",
-      "type": "promptString",
-      "default": ""
-    },
-  ]
 }
