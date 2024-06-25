@@ -1,0 +1,23 @@
+changelog:
+  exclude:
+    authors:
+      - renovate
+  categories:
+    - title: Breaking Changes 🛠
+      labels:
+        - breaking-change
+    - title: Exciting New Features 🎉
+      labels:
+        - feat
+    - title: Important Bug Fixes 🐛
+      labels:
+        - fix
+    - title: Documentation 📚
+      labels:
+        - docs
+    - title: Other changes 🏗️
+      labels:
+        - chore
+    - title: Dependencies 📦
+      labels:
+        - dependencies

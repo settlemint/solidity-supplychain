@@ -1,0 +1,29 @@
+  - kind: ethereum/contract
+    name: {id}
+    network: {chain}
+    source:
+      address: '{address}'
+      abi: ExampleSupplyChain
+      startBlock: {startBlock}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Roast
+      abis:
+        - name: ExampleSupplyChain
+          file: {root}/out/ExampleSupplyChain.sol/ExampleSupplyChain.json
+      eventHandlers:
+        - event: CreateLotEvent(string,string,string,string,string,string)
+          handler: handleCreateLot
+        - event: FirstProcessEvent(string,string,string,string,string,string)
+          handler: handleFirstProcess
+        - event: SecondProcessEvent(string,string,string,string,string)
+          handler: handleSecondProcess
+        - event: PackagingEvent(string,string,string,string,string,string)
+          handler: handlePackaging
+        - event: TransportEvent(string,string,string,string,string)
+          handler: handleTransport
+
+      file: {file}
