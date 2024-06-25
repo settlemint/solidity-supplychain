@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.26;
+pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
@@ -78,7 +78,14 @@ contract ExampleSupplyChain is Ownable {
         string memory lotNo,
         string memory transporterId
     ) external {
-        emit CreateLotEvent(lotType, quantity, operatorId, originId, lotNo, transporterId);
+        emit CreateLotEvent(
+            lotType,
+            quantity,
+            operatorId,
+            originId,
+            lotNo,
+            transporterId
+        );
     }
 
     function registerFirstProcess(
@@ -144,6 +151,12 @@ contract ExampleSupplyChain is Ownable {
     ) external {
         _transportLotId += 1;
 
-        emit TransportEvent(packageId, operatorId, transporterId, cartonId, Strings.toString(_transportLotId));
+        emit TransportEvent(
+            packageId,
+            operatorId,
+            transporterId,
+            cartonId,
+            Strings.toString(_transportLotId)
+        );
     }
 }

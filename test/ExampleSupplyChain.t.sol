@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.26;
+pragma solidity ^0.8.24;
 
 import "forge-std/Test.sol";
 import "../contracts/ExampleSupplyChain.sol";
@@ -32,7 +32,14 @@ contract ExampleSupplyChainTest is Test {
             transporterId
         );
 
-        supplyChain.createLot(lotType, quantity, operatorId, originId, lotNo, transporterId);
+        supplyChain.createLot(
+            lotType,
+            quantity,
+            operatorId,
+            originId,
+            lotNo,
+            transporterId
+        );
     }
 
     function testRegisterFirstProcessEmitsEvent() public {
@@ -145,13 +152,6 @@ contract ExampleSupplyChainTest is Test {
         );
 
         // Call the function that should emit the event
-        supplyChain.transport(
-            packageId,
-            operatorId,
-            transporterId,
-            cartonId
-        );
+        supplyChain.transport(packageId, operatorId, transporterId, cartonId);
     }
-
-
 }
