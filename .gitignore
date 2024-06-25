@@ -12,7 +12,6 @@ node_modules
 # solidity-coverage files
 /coverage
 /coverage.json
-lcov.info
 
 # Hardhat Ignition default folder for deployments against a local node
 ignition/deployments/chain-31337

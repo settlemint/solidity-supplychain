@@ -2,9 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    ":automergeMinor",
-    ":automergePr",
-    ":automergeRequireAllStatusChecks",
     ":gitSignOff",
     ":pinVersions",
     ":semanticCommits",
@@ -14,9 +11,12 @@
     ":prConcurrentLimitNone",
     ":prHourlyLimitNone",
     "security:openssf-scorecard",
-    "schedule:nonOfficeHours"
+    "schedule:nonOfficeHours",
+    "group:all"
   ],
-  "labels": ["dependencies"],
+  "labels": [
+    "dependencies"
+  ],
   "rebaseWhen": "conflicted",
   "packageRules": [],
   "hostRules": [
