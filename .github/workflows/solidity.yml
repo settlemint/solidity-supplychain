@@ -32,7 +32,8 @@ permissions:
 jobs:
   codescanning:
     name: Code Scanning
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: namespace-profile-btp-scs
     container:
       image: returntocorp/semgrep
     steps:
@@ -83,7 +84,8 @@ jobs:
         ports:
           - '8545:8545'
     name: Test
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: namespace-profile-btp-scs
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -168,7 +170,8 @@ jobs:
     needs:
       - test
     name: Docker
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: namespace-profile-btp-scs
     steps:
       - name: Checkout
         uses: actions/checkout@v4
