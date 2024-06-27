@@ -18,6 +18,7 @@ const config: HardhatUserConfig = {
     btp: {
       url: process.env.BTP_RPC_URL || "",
       gasPrice: process.env.BTP_GAS_PRICE ? parseInt(process.env.BTP_GAS_PRICE) : "auto",
+      timeout: 100_000,
     },
   },
   etherscan: {
