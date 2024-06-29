@@ -18,12 +18,7 @@ contract ExampleSupplyChain is Ownable {
     //////////////////////////////////////////////////////////////////
 
     event CreateLotEvent(
-        string lotType,
-        string quantity,
-        string operatorId,
-        string originId,
-        string lotNo,
-        string transporterId
+        string lotType, string quantity, string operatorId, string originId, string lotNo, string transporterId
     );
 
     event FirstProcessEvent(
@@ -53,11 +48,7 @@ contract ExampleSupplyChain is Ownable {
     );
 
     event TransportEvent(
-        string packageId,
-        string operatorId,
-        string transporterId,
-        string cartonId,
-        string transportLotId
+        string packageId, string operatorId, string transporterId, string cartonId, string transportLotId
     );
 
     //////////////////////////////////////////////////////////////////
@@ -77,15 +68,10 @@ contract ExampleSupplyChain is Ownable {
         string memory originId,
         string memory lotNo,
         string memory transporterId
-    ) external {
-        emit CreateLotEvent(
-            lotType,
-            quantity,
-            operatorId,
-            originId,
-            lotNo,
-            transporterId
-        );
+    )
+        external
+    {
+        emit CreateLotEvent(lotType, quantity, operatorId, originId, lotNo, transporterId);
     }
 
     function registerFirstProcess(
@@ -94,16 +80,13 @@ contract ExampleSupplyChain is Ownable {
         string memory machineId,
         string memory processingHouseId,
         string memory timestamp
-    ) external {
+    )
+        external
+    {
         _firstProcessLotId += 1;
 
         emit FirstProcessEvent(
-            lotNos,
-            operatorId,
-            machineId,
-            processingHouseId,
-            timestamp,
-            Strings.toString(_firstProcessLotId)
+            lotNos, operatorId, machineId, processingHouseId, timestamp, Strings.toString(_firstProcessLotId)
         );
     }
 
@@ -112,15 +95,13 @@ contract ExampleSupplyChain is Ownable {
         string memory machineId,
         string memory operatorId,
         string memory secondProcessOutputLotId
-    ) external {
+    )
+        external
+    {
         _secondProcessLotId += 1;
 
         emit SecondProcessEvent(
-            firstProcessLotIds,
-            machineId,
-            operatorId,
-            secondProcessOutputLotId,
-            Strings.toString(_secondProcessLotId)
+            firstProcessLotIds, machineId, operatorId, secondProcessOutputLotId, Strings.toString(_secondProcessLotId)
         );
     }
 
@@ -130,16 +111,13 @@ contract ExampleSupplyChain is Ownable {
         string memory packageId,
         string memory weight,
         string memory packagingType
-    ) external {
+    )
+        external
+    {
         _packingLotId += 1;
 
         emit PackagingEvent(
-            secondProcessLotId,
-            operatorId,
-            packageId,
-            weight,
-            packagingType,
-            Strings.toString(_packingLotId)
+            secondProcessLotId, operatorId, packageId, weight, packagingType, Strings.toString(_packingLotId)
         );
     }
 
@@ -148,15 +126,11 @@ contract ExampleSupplyChain is Ownable {
         string memory operatorId,
         string memory transporterId,
         string memory cartonId
-    ) external {
+    )
+        external
+    {
         _transportLotId += 1;
 
-        emit TransportEvent(
-            packageId,
-            operatorId,
-            transporterId,
-            cartonId,
-            Strings.toString(_transportLotId)
-        );
+        emit TransportEvent(packageId, operatorId, transporterId, cartonId, Strings.toString(_transportLotId));
     }
 }

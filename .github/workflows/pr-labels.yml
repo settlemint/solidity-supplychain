@@ -23,6 +23,7 @@ permissions:
 
 jobs:
   labels:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: namespace-profile-btp-scs
     steps:
       - uses: fuxingloh/multi-labeler@v4

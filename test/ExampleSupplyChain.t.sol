@@ -23,23 +23,9 @@ contract ExampleSupplyChainTest is Test {
         vm.expectEmit(true, true, true, true);
 
         // Emit the expected event
-        emit ExampleSupplyChain.CreateLotEvent(
-            lotType,
-            quantity,
-            operatorId,
-            originId,
-            lotNo,
-            transporterId
-        );
+        emit ExampleSupplyChain.CreateLotEvent(lotType, quantity, operatorId, originId, lotNo, transporterId);
 
-        supplyChain.createLot(
-            lotType,
-            quantity,
-            operatorId,
-            originId,
-            lotNo,
-            transporterId
-        );
+        supplyChain.createLot(lotType, quantity, operatorId, originId, lotNo, transporterId);
     }
 
     function testRegisterFirstProcessEmitsEvent() public {
@@ -64,13 +50,7 @@ contract ExampleSupplyChainTest is Test {
         );
 
         // Call the function that should emit the event
-        supplyChain.registerFirstProcess(
-            lotNos,
-            operatorId,
-            machineId,
-            processingHouseId,
-            timestamp
-        );
+        supplyChain.registerFirstProcess(lotNos, operatorId, machineId, processingHouseId, timestamp);
     }
 
     function testRegisterSecondProcessEmitsEvent() public {
@@ -93,12 +73,7 @@ contract ExampleSupplyChainTest is Test {
         );
 
         // Call the function that should emit the event
-        supplyChain.registerSecondProcess(
-            firstProcessLotIds,
-            machineId,
-            operatorId,
-            secondProcessOutputLotId
-        );
+        supplyChain.registerSecondProcess(firstProcessLotIds, machineId, operatorId, secondProcessOutputLotId);
     }
 
     function testPackingEmitsEvent() public {
@@ -123,13 +98,7 @@ contract ExampleSupplyChainTest is Test {
         );
 
         // Call the function that should emit the event
-        supplyChain.packing(
-            secondProcessLotId,
-            operatorId,
-            packageId,
-            weight,
-            packagingType
-        );
+        supplyChain.packing(secondProcessLotId, operatorId, packageId, weight, packagingType);
     }
 
     function testTransportEmitsEvent() public {

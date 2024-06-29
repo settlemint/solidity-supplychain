@@ -47,16 +47,6 @@ jobs:
           apk update
           apk add --no-cache cairo-dev jpeg-dev pango-dev giflib-dev build-base g++ pkgconfig
 
-      - name: Fetch semgrep rules
-        uses: actions/checkout@v4
-        with:
-          repository: decurity/semgrep-smart-contracts
-          path: rules
-
-      - run: semgrep ci --sarif --output=semgrep.sarif || true
-        env:
-          SEMGREP_RULES: rules/solidity/security rules/solidity/performance
-
       - uses: crytic/slither-action@v0.4.0
         id: slither
         with:
