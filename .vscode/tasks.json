@@ -94,6 +94,22 @@
       "problemMatcher": []
     },
     {
+      "label": "The Graph - Codegen the subgraph types",
+      "type": "shell",
+      "command": "btp-scs subgraph codegen",
+      "problemMatcher": []
+    },
+    {
+      "label": "The Graph - Build the subgraph",
+      "type": "shell",
+      "command": "btp-scs subgraph build",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+    },
+    {
       "label": "The Graph - Deploy or update the subgraph",
       "type": "shell",
       "command": "btp-scs subgraph deploy",
