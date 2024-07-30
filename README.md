@@ -1,8 +1,27 @@
-![OG](OG_Solidity.jpg)
+<p align="center">
+  <img src="https://github.com/settlemint/solidity-supplychain/blob/main/OG_Solidity.jpg"  align="center" alt="logo" />
+  <h1 align="center">SettleMint Blockchain Transformation Platform Supplychain Smart Contract Set</h1>
+  <p align="center">
+    ✨ <a href="https://settlemint.com">https://settlemint.com</a> ✨
+    <br/>
+    Build a supplychain usecase in the SettleMint Blockchain Transformation Platform with ease.
+  </p>
+</p>
+<br/>
+<p align="center">
+<a href="https://github.com/settlemint/solidity-supplychain/actions?query=branch%3Amain"><img src="https://github.com/settlemint/solidity-supplychain/actions/workflows/solidity.yml/badge.svg?event=push&branch=main" alt="CI status" /></a>
+<a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/github/license/settlemint/solidity-supplychain" alt="License"></a>
+<a href="https://github.com/settlemint/solidity-supplychain" rel="nofollow"><img src="https://img.shields.io/github/stars/settlemint/solidity-supplychain" alt="stars"></a>
+</p>
 
-# Example Supplychain
-
-A basic Supplychain contract.
+<div align="center">
+  <a href="https://console.settlemint.com/documentation/">Documentation</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://discord.com/invite/Mt5yqFrey9">Discord</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://github.com/settlemint/solidity-supplychain/issues">Issues</a>
+  <br />
+</div>
 
 ## Get started
 
