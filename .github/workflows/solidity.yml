@@ -34,8 +34,6 @@ jobs:
     name: Code Scanning
     #runs-on: ubuntu-latest
     runs-on: namespace-profile-btp-scs
-    container:
-      image: returntocorp/semgrep
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,8 +42,8 @@ jobs:
 
       - name: Install canvas dependencies
         run: |
-          apk update
-          apk add --no-cache cairo-dev jpeg-dev pango-dev giflib-dev build-base g++ pkgconfig
+          apt-get update
+          apt-get install cairo-dev jpeg-dev pango-dev giflib-dev build-base g++ pkgconfig
 
       - uses: crytic/slither-action@v0.4.0
         id: slither
