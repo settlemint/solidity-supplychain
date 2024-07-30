@@ -42,8 +42,8 @@ jobs:
 
       - name: Install canvas dependencies
         run: |
-          apt-get update
-          apt-get install cairo-dev jpeg-dev pango-dev giflib-dev build-base g++ pkgconfig
+          sudo apt-get update
+          sudo apt-get install cairo-dev jpeg-dev pango-dev giflib-dev build-base g++ pkgconfig
 
       - uses: crytic/slither-action@v0.4.0
         id: slither
