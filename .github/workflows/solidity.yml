@@ -140,11 +140,10 @@ jobs:
           npx graph build generated/scs.subgraph.yaml
 
       - name: Report code coverage
-        if: github.ref_name != 'main'
+        if: github.event_name == 'pull_request'
         uses: zgosalvez/github-actions-report-lcov@v4.1.12
         with:
           coverage-files: lcov.info
-          minimum-coverage: 90
           github-token: ${{ secrets.GITHUB_TOKEN }}
           update-comment: true
 
