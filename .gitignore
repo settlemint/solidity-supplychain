@@ -36,3 +36,4 @@ generated
 build
 
 .pnpm
+lcov.info
