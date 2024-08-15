@@ -1,4 +1,4 @@
-name: Branch
+name: Solidity
 
 on:
   pull_request:
@@ -65,7 +65,7 @@ jobs:
         image: ghcr.io/settlemint/btp-anvil-test-node:latest
         ports:
           - '8545:8545'
-    name: Test
+    name: Build Set
     #runs-on: ubuntu-latest
     runs-on: namespace-profile-btp-scs
     steps:
@@ -147,18 +147,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           update-comment: true
 
-  docker:
-    needs:
-      - test
-    name: Docker
-    #runs-on: ubuntu-latest
-    runs-on: namespace-profile-btp-scs
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v4
 
@@ -192,11 +180,6 @@ jobs:
         run: |
           zsh --version
           which zsh
-
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
-        with:
-          version: nightly
 
       - name: Generate README.md
         if: github.repository == 'settlemint/solidity-predeployed'
