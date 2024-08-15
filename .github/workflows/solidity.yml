@@ -195,6 +195,7 @@ jobs:
           rm -Rf README.md
           cp .github/BASE.md README.md
           ./genesis-output
+          echo "" >> README.md
           echo "\`\`\`json" >> README.md
           cat all_allocations.json >> README.md
           echo "\`\`\`" >> README.md
