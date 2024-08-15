@@ -159,6 +159,57 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4
+
+      - name: Package version
+        id: package-version
+        run: |
+          OLD_VERSION=$(jq -r '.version' package.json)
+          echo "Old version: $OLD_VERSION"
+          if [[ $GITHUB_REF_SLUG =~ ^v?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            VERSION=$(echo $GITHUB_REF_SLUG | sed 's/^v//')
+            echo "TAG=latest" >> $GITHUB_ENV
+          elif [[ $GITHUB_REF_NAME == "main" ]]; then
+            VERSION="${OLD_VERSION}-main$(echo $GITHUB_SHA_SHORT | sed 's/^v//')"
+            echo "TAG=main" >> $GITHUB_ENV
+          else
+            VERSION="${OLD_VERSION}-pr$(echo $GITHUB_SHA_SHORT | sed 's/^v//')"
+            echo "TAG=pr" >> $GITHUB_ENV
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Updating version to $VERSION"
+          jq --arg version "$VERSION" '.version = $version' package.json > package.json.tmp && mv package.json.tmp package.json
+
+          echo "Updated version to $VERSION"
+
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./package.json
+          access: public
+          provenance: false
+          strategy: all
+          tag: ${{ env.TAG }}
+
+      - name: Create or update a comment
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: taoliujun/action-unique-comment@v1
+        with:
+            uniqueIdentifier: ${{ github.workflow }}
+            body: |
+                # 📦 Packages
+                | Package | Install |
+                | ------- | -------------------- |
+                | React | `npm i @${{ github.repository_owner }}/${{ github.repository }}@${{ env.VERSION }}` |
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        if: ${{ env.TAG == 'latest' }}
+        with:
+          commit_message: "chore: update package versions [skip ci]"
+          branch: main
+          file_pattern: 'package.json'
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
