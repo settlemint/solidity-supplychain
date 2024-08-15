@@ -70,10 +70,17 @@ jobs:
     runs-on: namespace-profile-btp-scs
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: namespacelabs/nscloud-checkout-action@v5
         with:
           submodules: recursive
           token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Setup caches
+        uses: namespacelabs/nscloud-cache-action@v1
+        with:
+          path: |
+            ./node_modules
+            ~/.npm
 
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
