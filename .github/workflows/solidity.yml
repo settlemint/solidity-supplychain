@@ -183,6 +183,12 @@ jobs:
 
           echo "Updated version to $VERSION"
 
+      - name: Generate README.md
+        if: github.repository == 'settlemint/solidity-predeployed'
+        run: |
+          rm -Rf README.md
+          cp .github/BASE.md README.md
+
       - uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
