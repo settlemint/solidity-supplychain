@@ -193,6 +193,10 @@ jobs:
           zsh --version
           which zsh
 
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
 
       - name: Generate README.md
         if: github.repository == 'settlemint/solidity-predeployed'
