@@ -183,6 +183,17 @@ jobs:
 
           echo "Updated version to $VERSION"
 
+      - name: Install zsh
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zsh
+
+      - name: Verify zsh installation
+        run: |
+          zsh --version
+          which zsh
+
+
       - name: Generate README.md
         if: github.repository == 'settlemint/solidity-predeployed'
         run: |
