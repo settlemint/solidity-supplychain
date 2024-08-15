@@ -1,16 +1,16 @@
 <p align="center">
-  <img src="https://github.com/settlemint/solidity-supplychain/blob/main/OG_Solidity.jpg"  align="center" alt="logo" />
-  <h1 align="center">SettleMint Blockchain Transformation Platform Supplychain Smart Contract Set</h1>
+  <img src="https://github.com/settlemint/solidity-supplychain/blob/main/OG_Solidity.jpg" align="center" alt="logo" />
   <p align="center">
     ✨ <a href="https://settlemint.com">https://settlemint.com</a> ✨
     <br/>
-    Build a supplychain usecase in the SettleMint Blockchain Transformation Platform with ease.
+    Build your own blockchain usecase with ease.
   </p>
 </p>
 <br/>
 <p align="center">
 <a href="https://github.com/settlemint/solidity-supplychain/actions?query=branch%3Amain"><img src="https://github.com/settlemint/solidity-supplychain/actions/workflows/solidity.yml/badge.svg?event=push&branch=main" alt="CI status" /></a>
-<a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/github/license/settlemint/solidity-supplychain" alt="License"></a>
+<a href="https://fsl.software" rel="nofollow"><img src="https://img.shields.io/npm/l/@settlemint/sdk" alt="License"></a>
+<a href="https://www.npmjs.com/package/@settlemint/solidity-supplychain" rel="nofollow"><img src="https://img.shields.io/npm/dw/@settlemint/solidity-supplychain" alt="npm"></a>
 <a href="https://github.com/settlemint/solidity-supplychain" rel="nofollow"><img src="https://img.shields.io/github/stars/settlemint/solidity-supplychain" alt="stars"></a>
 </p>
 
@@ -19,18 +19,26 @@
   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
   <a href="https://discord.com/invite/Mt5yqFrey9">Discord</a>
   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://www.npmjs.com/package/@settlemint/solidity-supplychain">NPM</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
   <a href="https://github.com/settlemint/solidity-supplychain/issues">Issues</a>
   <br />
 </div>
 
 ## Get started
 
-Launch this smart contract set in the SettleMint Blockchain Transformation platform under the `Smart Contract Sets` section. This will automatically link it to your own blockchain node and make use of the private keys living in the platform.
+Launch this smart contract set in SettleMint under the `Smart Contract Sets` section. This will automatically link it to your own blockchain node and make use of the private keys living in the platform.
 
 If you want to use it separately, bootstrap a new project using
 
 ```shell
-forge init my-erc20-token --template settlemint/solidity-token-erc20
+forge init my-project --template settlemint/solidity-supplychain
+```
+
+Or if you want to use this set as a dependency of your own,
+
+```shell
+npm install @settlemint/solidity-supplychain
 ```
 
 ## DX: Foundry & Hardhat hybrid
@@ -54,82 +62,9 @@ Hardhat consists of:
 
 ## Documentation
 
-- <https://console.settlemint.com/documentation/docs/using-platform/integrated-development-environment/>
-- <https://book.getfoundry.sh/>
+- Additional documentation can be found in the [docs folder](./docs).
+- [SettleMint Documentation](https://console.settlemint.com/documentation/docs/using-platform/integrated-development-environment/)
+- [Foundry Documentation](https://book.getfoundry.sh/)
+- [Hardhat Documentation](https://hardhat.org/hardhat-runner/docs/getting-started)
 
-## Usage
 
-### Build
-
-You can either use Forge:
-
-```shell
-btp-scs foundry build
-```
-
-or Hardhat:
-
-```shell
-btp-scs hardhat build
-```
-
-### Test
-
-With Forge:
-
-```shell
-btp-scs foundry test
-```
-
-or Hardhat:
-
-```shell
-btp-scs hardhat test
-```
-
-### Format
-
-To format your contracts, run
-
-```shell
-btp-scs foundry format
-```
-
-### Deploy to local network
-
-You can deploy your contracts to a local network. First, run
-
-```shell
-btp-scs hardhat network
-```
-
-then:
-
-```shell
-btp-scs hardhat deploy local -m ignition/modules/main.ts
-```
-
-### Deploy to platform network
-
-You can also deploy your contracts to the network running on the platform by executing the following command:
-
-```shell
-btp-scs hardhat deploy remote -m ignition/modules/main.ts
-```
-
-### Deploy your subgraph
-
-To index your smart contract events, use The Graph middleware.
-First, edit `subgraph.config.json` to set the addresses of your smart contracts. You can find them in the deployment folder created under `ignation`. Then, run:
-
-```shell
-btp-scs subgraph deploy
-```
-
-### Help
-
-To get info about the tasks, run:
-
-```shell
-btp-scs --help
-```
