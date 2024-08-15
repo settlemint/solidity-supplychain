@@ -192,7 +192,7 @@ jobs:
           echo "```json" >> README.md
           cat all_allocations.json >> README.md
           echo "```" >> README.md
-
+          cat all_allocations.json
 
       - uses: JS-DevTools/npm-publish@v3
         with:
