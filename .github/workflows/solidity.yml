@@ -149,7 +149,7 @@ jobs:
 
       - name: Report code coverage
         if: github.event_name == 'pull_request'
-        uses: zgosalvez/github-actions-report-lcov@v4.1.13
+        uses: zgosalvez/github-actions-report-lcov@v4.1.14
         with:
           coverage-files: lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
