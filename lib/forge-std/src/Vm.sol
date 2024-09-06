@@ -279,6 +279,9 @@ interface VmSafe {
         pure
         returns (uint256 privateKey);
 
+    /// Derives secp256r1 public key from the provided `privateKey`.
+    function publicKeyP256(uint256 privateKey) external pure returns (uint256 publicKeyX, uint256 publicKeyY);
+
     /// Adds a private key to the local forge wallet and returns the address.
     function rememberKey(uint256 privateKey) external returns (address keyAddr);
 
@@ -555,6 +558,9 @@ interface VmSafe {
 
     /// Record all the transaction logs.
     function recordLogs() external;
+
+    /// Reset gas metering (i.e. gas usage is set to gas limit).
+    function resetGasMetering() external;
 
     /// Resumes gas metering (i.e. gas usage is counted again). Noop if already on.
     function resumeGasMetering() external;
@@ -1549,6 +1555,10 @@ interface VmSafe {
     /// Labels an address in call traces.
     function label(address account, string calldata newLabel) external;
 
+    /// Pauses collection of call traces. Useful in cases when you want to skip tracing of
+    /// complex calls which are not useful for debugging.
+    function pauseTracing() external view;
+
     /// Returns a random `address`.
     function randomAddress() external returns (address);
 
@@ -1557,6 +1567,9 @@ interface VmSafe {
 
     /// Returns random uin256 value between the provided range (=min..=max).
     function randomUint(uint256 min, uint256 max) external returns (uint256);
+
+    /// Unpauses collection of call traces.
+    function resumeTracing() external view;
 
     /// Encodes a `bytes` value to a base64url string.
     function toBase64URL(bytes calldata data) external pure returns (string memory);
@@ -1855,10 +1868,13 @@ interface Vm is VmSafe {
     /// Same as the previous method, but also checks supplied address against emitting contract.
     function expectEmit(address emitter) external;
 
+    /// Expects an error on next call that starts with the revert data.
+    function expectPartialRevert(bytes4 revertData) external;
+
     /// Expects an error on next call with any revert data.
     function expectRevert() external;
 
-    /// Expects an error on next call that starts with the revert data.
+    /// Expects an error on next call that exactly matches the revert data.
     function expectRevert(bytes4 revertData) external;
 
     /// Expects an error on next call that exactly matches the revert data.
