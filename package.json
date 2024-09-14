@@ -34,7 +34,7 @@
     "/artifacts"
   ],
   "dependencies": {
-    "@amxx/graphprotocol-utils": "1.1.0",
+    "@amxx/graphprotocol-utils": "1.2.0",
     "@graphprotocol/graph-cli": "0.81.0",
     "@graphprotocol/graph-ts": "0.35.1",
     "@nomicfoundation/hardhat-foundry": "1.1.2",
