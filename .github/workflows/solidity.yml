@@ -124,16 +124,16 @@ jobs:
           circom circuits/nf_anon_nullifier.circom --output ./js/lib --sym --wasm
           circom circuits/nf_anon.circom --output ./js/lib --sym --wasm
 
-      - name: Create folder
+      - name: Create folders
         if: github.repository == 'settlemint/solidity-zeto'
         run: |
           mkdir -p ./zeto/proving-keys
+          mkdir -p ./zeto/contracts-lib
 
       - name: Download ptau
         if: github.repository == 'settlemint/solidity-zeto'
+        working-directory: zeto/proving-keys/
         run: |
-          cd zeto
-          cd proving-keys
           wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_12.ptau
           wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_13.ptau
           wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_16.ptau
@@ -142,9 +142,8 @@ jobs:
 
       - name: Generate R1CS circuit format
         if: github.repository == 'settlemint/solidity-zeto'
+        working-directory: zeto/zkp/
         run: |
-          cd zeto
-          cd zkp/
           circom circuits/anon_enc_nullifier.circom --output ../proving-keys --r1cs
           circom circuits/anon_enc.circom --output ../proving-keys --r1cs
           circom circuits/anon_nullifier.circom --output ../proving-keys --r1cs
@@ -152,13 +151,11 @@ jobs:
           circom circuits/check-nullifiers.circom --output ../proving-keys --r1cs
           circom circuits/nf_anon_nullifier.circom --output ../proving-keys --r1cs
           circom circuits/nf_anon.circom --output ../proving-keys --r1cs
-          ls ../proving-keys -la
 
       - name: Generate proving keys
         if: github.repository == 'settlemint/solidity-zeto'
+        working-directory: zeto/zkp/
         run: |
-          cd zeto
-          cd zkp/
           snarkjs groth16 setup ../proving-keys/anon.r1cs ../proving-keys/powersOfTau28_hez_final_12.ptau ../proving-keys/anon.zkey
           snarkjs groth16 setup ../proving-keys/anon_enc.r1cs ../proving-keys/powersOfTau28_hez_final_13.ptau ../proving-keys/anon_enc.zkey
           snarkjs groth16 setup ../proving-keys/anon_nullifier.r1cs ../proving-keys/powersOfTau28_hez_final_16.ptau ../proving-keys/anon_nullifier.zkey
@@ -168,9 +165,8 @@ jobs:
 
       - name: Per-circuit set up ceremony on proving keys
         if: github.repository == 'settlemint/solidity-zeto'
+        working-directory: zeto/zkp/
         run: |
-          cd zeto
-          cd zkp/
           snarkjs zkey contribute ../proving-keys/anon.zkey ../proving-keys/anon_new.zkey --name="contribution" -v -e="random entropy"
           snarkjs zkey contribute ../proving-keys/anon_enc.zkey ../proving-keys/anon_enc_new.zkey --name="contribution" -v -e="random entropy"
           snarkjs zkey contribute ../proving-keys/anon_nullifier.zkey ../proving-keys/anon_nullifier_new.zkey --name="contribution" -v -e="random entropy"
@@ -180,10 +176,8 @@ jobs:
 
       - name: Generate verfication keys
         if: github.repository == 'settlemint/solidity-zeto'
+        working-directory: zeto/zkp/
         run: |
-          cd zeto
-          cd zeto
-          cd zkp/
           snarkjs zkey export verificationkey ../proving-keys/anon_new.zkey ../proving-keys/anon-vkey.json
           snarkjs zkey export verificationkey ../proving-keys/anon_enc_new.zkey ../proving-keys/anon_enc-vkey.json
           snarkjs zkey export verificationkey ../proving-keys/anon_nullifier_new.zkey ../proving-keys/anon_nullifier-vkey.json
@@ -193,11 +187,8 @@ jobs:
 
       - name: Generate solidity verifier library
         if: github.repository == 'settlemint/solidity-zeto'
+        working-directory: zeto/zkp/
         run: |
-          mkdir -p ./zeto/contracts-lib
-          mkdir -p ./zeto/contracts-lib
-          cd zeto
-          cd zkp/
           snarkjs zkey export solidityverifier ../proving-keys/anon_new.zkey ../contracts-lib/verifier_anon.sol
           snarkjs zkey export solidityverifier ../proving-keys/anon_enc_new.zkey ../contracts-lib/verifier_anon_enc.sol
           snarkjs zkey export solidityverifier ../proving-keys/anon_nullifier_new.zkey ../contracts-lib/verifier_anon_nullifier.sol
@@ -205,12 +196,10 @@ jobs:
           snarkjs zkey export solidityverifier ../proving-keys/nf_anon_new.zkey ../contracts-lib/verifier_nf_anon.sol
           snarkjs zkey export solidityverifier ../proving-keys/nf_anon_nullifier_new.zkey ../contracts-lib/verifier_nf_anon_nullifier.sol
 
-
       - name: Edit solidity files
         if: github.repository == 'settlemint/solidity-zeto'
+        working-directory: zeto/contracts-lib/
         run: |
-            cd zeto
-            cd contracts-lib
             sed 's/Groth16Verifier/Groth16Verifier_Anon/' verifier_anon.sol > ../solidity/contracts/lib/verifier_anon.sol
             sed 's/Groth16Verifier/Groth16Verifier_AnonEnc/' verifier_anon_enc.sol > ../solidity/contracts/lib/verifier_anon_enc.sol
             sed 's/Groth16Verifier/Groth16Verifier_AnonNullifier/' verifier_anon_nullifier.sol > ../solidity/contracts/lib/verifier_anon_nullifier.sol
