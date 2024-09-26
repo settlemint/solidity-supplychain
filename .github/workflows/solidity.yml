@@ -50,6 +50,7 @@ jobs:
         with:
           sarif: slither.sarif
           slither-args: --filter-paths "lib/" --filter-paths "node_modules/"
+          solc-version: ${{ vars.SOL_VERSION || '0.8.24' }}
           fail-on: none
 
       - name: Upload findings to GitHub Advanced Security Dashboard
