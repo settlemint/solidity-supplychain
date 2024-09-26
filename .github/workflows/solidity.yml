@@ -94,6 +94,132 @@ jobs:
       - name: Install Node dependencies
         run: npm install
 
+      - name: install circom
+        run: |
+          if [[ ${{ github.repository }} == *"zeto"* ]]; then
+            curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
+            git clone https://github.com/iden3/circom.git
+            cd circom
+            cargo build --release
+            cargo install --path circom
+          fi
+
+      - name: install snarkjs
+        run: |
+          if [[ ${{ github.repository }} == *"zeto"* ]]; then
+            npm install -g snarkjs@latest
+          fi
+
+      - name: install zeto
+        run: |
+          if [[ ${{ github.repository }} == *"zeto"* ]]; then
+            git clone https://github.com/victoryeo/zeto.git
+            cd zeto
+            cd zkp/circuits
+            npm install
+            cd ..
+            circom circuits/anon_enc_nullifier.circom --output ./js/lib --sym --wasm
+            circom circuits/anon_enc.circom --output ./js/lib --sym --wasm
+            circom circuits/anon_nullifier.circom --output ./js/lib --sym --wasm
+            circom circuits/anon.circom --output ./js/lib --sym --wasm
+            circom circuits/check-nullifiers.circom --output ./js/lib --sym --wasm
+            circom circuits/nf_anon_nullifier.circom --output ./js/lib --sym --wasm
+            circom circuits/nf_anon.circom --output ./js/lib --sym --wasm
+          fi
+      - name: create folder
+        run: |
+          if [[ ${{ github.repository }} == *"zeto"* ]]; then
+            mkdir -p ./zeto/proving-keys
+          fi
+      - name: download ptau
+        run: |
+          if [[ ${{ github.repository }} == *"zeto"* ]]; then
+            cd zeto
+            cd proving-keys
+            wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_12.ptau
+            wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_13.ptau
+            wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_16.ptau
+            wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_11.ptau
+            wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_15.ptau
+          fi
+      - name: generate R1CS circuit format
+        run: |
+          if [[ ${{ github.repository }} == *"zeto"* ]]; then
+            cd zeto
+            cd zkp/
+            circom circuits/anon_enc_nullifier.circom --output ../proving-keys --r1cs
+            circom circuits/anon_enc.circom --output ../proving-keys --r1cs
+            circom circuits/anon_nullifier.circom --output ../proving-keys --r1cs
+            circom circuits/anon.circom --output ../proving-keys --r1cs
+            circom circuits/check-nullifiers.circom --output ../proving-keys --r1cs
+            circom circuits/nf_anon_nullifier.circom --output ../proving-keys --r1cs
+            circom circuits/nf_anon.circom --output ../proving-keys --r1cs
+            ls ../proving-keys -la
+          fi
+      - name: generate proving keys
+        run: |
+          if [[ ${{ github.repository }} == *"zeto"* ]]; then
+            cd zeto
+            cd zkp/
+            snarkjs groth16 setup ../proving-keys/anon.r1cs ../proving-keys/powersOfTau28_hez_final_12.ptau ../proving-keys/anon.zkey
+            snarkjs groth16 setup ../proving-keys/anon_enc.r1cs ../proving-keys/powersOfTau28_hez_final_13.ptau ../proving-keys/anon_enc.zkey
+            snarkjs groth16 setup ../proving-keys/anon_nullifier.r1cs ../proving-keys/powersOfTau28_hez_final_16.ptau ../proving-keys/anon_nullifier.zkey
+            snarkjs groth16 setup ../proving-keys/anon_enc_nullifier.r1cs ../proving-keys/powersOfTau28_hez_final_16.ptau ../proving-keys/anon_enc_nullifier.zkey
+            snarkjs groth16 setup ../proving-keys/nf_anon.r1cs ../proving-keys/powersOfTau28_hez_final_11.ptau ../proving-keys/nf_anon.zkey
+            snarkjs groth16 setup ../proving-keys/nf_anon_nullifier.r1cs ../proving-keys/powersOfTau28_hez_final_15.ptau ../proving-keys/nf_anon_nullifier.zkey
+          fi
+      - name: per-circuit set up ceremony on proving keys
+        run: |
+          if [[ ${{ github.repository }} == *"zeto"* ]]; then
+            cd zeto
+            cd zkp/
+            snarkjs zkey contribute ../proving-keys/anon.zkey ../proving-keys/anon_new.zkey --name="contribution" -v -e="random entropy"
+            snarkjs zkey contribute ../proving-keys/anon_enc.zkey ../proving-keys/anon_enc_new.zkey --name="contribution" -v -e="random entropy"
+            snarkjs zkey contribute ../proving-keys/anon_nullifier.zkey ../proving-keys/anon_nullifier_new.zkey --name="contribution" -v -e="random entropy"
+            snarkjs zkey contribute ../proving-keys/anon_enc_nullifier.zkey ../proving-keys/anon_enc_nullifier_new.zkey --name="contribution" -v -e="random entropy"
+            snarkjs zkey contribute ../proving-keys/nf_anon.zkey ../proving-keys/nf_anon_new.zkey --name="contribution" -v -e="random entropy"
+            snarkjs zkey contribute ../proving-keys/nf_anon_nullifier.zkey ../proving-keys/nf_anon_nullifier_new.zkey --name="contribution" -v -e="random entropy"
+          fi
+      - name: generate verfication keys
+        run: |
+          if [[ ${{ github.repository }} == *"zeto"* ]]; then
+            cd zeto
+            cd zkp/
+            snarkjs zkey export verificationkey ../proving-keys/anon_new.zkey ../proving-keys/anon-vkey.json
+            snarkjs zkey export verificationkey ../proving-keys/anon_enc_new.zkey ../proving-keys/anon_enc-vkey.json
+            snarkjs zkey export verificationkey ../proving-keys/anon_nullifier_new.zkey ../proving-keys/anon_nullifier-vkey.json
+            snarkjs zkey export verificationkey ../proving-keys/anon_enc_nullifier_new.zkey ../proving-keys/anon_enc_nullifier-vkey.json
+            snarkjs zkey export verificationkey ../proving-keys/nf_anon_new.zkey ../proving-keys/nf_anon-vkey.json
+            snarkjs zkey export verificationkey ../proving-keys/nf_anon_nullifier_new.zkey ../proving-keys/nf_anon_nullifier-vkey.json
+          fi
+      - name: generate solidity verifier library
+        run: |
+          if [[ ${{ github.repository }} == *"zeto"* ]]; then
+            mkdir -p ./zeto/contracts-lib
+            cd zeto
+            cd zkp/
+            snarkjs zkey export solidityverifier ../proving-keys/anon_new.zkey ../contracts-lib/verifier_anon.sol
+            snarkjs zkey export solidityverifier ../proving-keys/anon_enc_new.zkey ../contracts-lib/verifier_anon_enc.sol
+            snarkjs zkey export solidityverifier ../proving-keys/anon_nullifier_new.zkey ../contracts-lib/verifier_anon_nullifier.sol
+            snarkjs zkey export solidityverifier ../proving-keys/anon_enc_nullifier_new.zkey ../contracts-lib/verifier_anon_enc_nullifier.sol
+            snarkjs zkey export solidityverifier ../proving-keys/nf_anon_new.zkey ../contracts-lib/verifier_nf_anon.sol
+            snarkjs zkey export solidityverifier ../proving-keys/nf_anon_nullifier_new.zkey ../contracts-lib/verifier_nf_anon_nullifier.sol
+            ls ../proving-keys -la
+            ls ../contracts-lib -la
+          fi
+      - name: edit solidity files
+        run: |
+          if [[ ${{ github.repository }} == *"zeto"* ]]; then
+            cd zeto
+            cd contracts-lib
+            sed 's/Groth16Verifier/Groth16Verifier_Anon/' verifier_anon.sol > ../solidity/contracts/lib/verifier_anon.sol
+            sed 's/Groth16Verifier/Groth16Verifier_AnonEnc/' verifier_anon_enc.sol > ../solidity/contracts/lib/verifier_anon_enc.sol
+            sed 's/Groth16Verifier/Groth16Verifier_AnonNullifier/' verifier_anon_nullifier.sol > ../solidity/contracts/lib/verifier_anon_nullifier.sol
+            sed 's/Groth16Verifier/Groth16Verifier_AnonEncNullifier/' verifier_anon_enc_nullifier.sol > ../solidity/contracts/lib/verifier_anon_enc_nullifier.sol
+            sed 's/Groth16Verifier/Groth16Verifier_NFAnon/' verifier_nf_anon.sol > ../solidity/contracts/lib/verifier_nf_anon.sol
+            sed 's/Groth16Verifier/Groth16Verifier_NFAnonNullifier/' verifier_nf_anon_nullifier.sol > ../solidity/contracts/lib/verifier_nf_anon_nullifier.sol
+          fi
+
       - name: Run Forge build
         run: |
           forge --version
