@@ -250,15 +250,22 @@ jobs:
             echo "Subgraph directory is missing or empty"
             exit 0
           fi
-          npx graph-compiler --config subgraph/subgraph.config.json --include node_modules/@openzeppelin/subgraphs/src/datasources subgraph/datasources --export-schema --export-subgraph
-          yq -i e '.specVersion = "1.2.0"' generated/scs.subgraph.yaml
-          yq -i e '.features = ["nonFatalErrors", "fullTextSearch", "ipfsOnEthereumContracts"]' generated/scs.subgraph.yaml
-          yq -i e '.dataSources[].mapping.apiVersion = "0.0.7"' generated/scs.subgraph.yaml
-          yq -i e '.dataSources[].network = "localhost"' generated/scs.subgraph.yaml
-          yq -i e '.templates[].mapping.apiVersion = "0.0.7"' generated/scs.subgraph.yaml
-          yq -i e '.templates[].network = "localhost"' generated/scs.subgraph.yaml
-          npx graph codegen generated/scs.subgraph.yaml
-          npx graph build generated/scs.subgraph.yaml
+          if [ -f "subgraph/subgraph.config.json" ]; then
+            npx graph-compiler --config subgraph/subgraph.config.json --include node_modules/@openzeppelin/subgraphs/src/datasources subgraph/datasources --export-schema --export-subgraph
+            yq -i e '.specVersion = "1.2.0"' generated/scs.subgraph.yaml
+            yq -i e '.features = ["nonFatalErrors", "fullTextSearch", "ipfsOnEthereumContracts"]' generated/scs.subgraph.yaml
+            yq -i e '.dataSources[].mapping.apiVersion = "0.0.7"' generated/scs.subgraph.yaml
+            yq -i e '.dataSources[].network = "localhost"' generated/scs.subgraph.yaml
+            yq -i e '.templates[].mapping.apiVersion = "0.0.7"' generated/scs.subgraph.yaml
+            yq -i e '.templates[].network = "localhost"' generated/scs.subgraph.yaml
+            npx graph codegen generated/scs.subgraph.yaml
+            npx graph build --ipfs=https://ipfs.network.thegraph.com generated/scs.subgraph.yaml
+          else
+            cd subgraph
+            npx graph codegen subgraph.yaml
+            npx graph build --ipfs=https://ipfs.network.thegraph.com subgraph.yaml
+          fi
+
 
       - name: Report code coverage
         if: github.event_name == 'pull_request'
