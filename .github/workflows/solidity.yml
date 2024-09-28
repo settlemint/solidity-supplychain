@@ -259,11 +259,26 @@ jobs:
             yq -i e '.templates[].mapping.apiVersion = "0.0.7"' generated/scs.subgraph.yaml
             yq -i e '.templates[].network = "localhost"' generated/scs.subgraph.yaml
             npx graph codegen generated/scs.subgraph.yaml
-            npx graph build --ipfs=https://ipfs.network.thegraph.com generated/scs.subgraph.yaml
+            npx graph build --ipfs=https://ipfs.network.thegraph.com generated/scs.subgraph.yaml | tee build_output.txt
           else
             cd subgraph
             npx graph codegen subgraph.yaml
-            npx graph build --ipfs=https://ipfs.network.thegraph.com subgraph.yaml
+            npx graph build --ipfs=https://ipfs.network.thegraph.com subgraph.yaml | tee build_output.txt
+
+            # Extract and process IPFS hashes from the file
+            ipfs_hashes=$(grep -oP 'Qm[a-zA-Z0-9]{44}' build_output.txt)
+            for hash in $ipfs_hashes; do
+              echo "Processing IPFS hash: $hash"
+              curl -X POST -u "${{ secrets.INFURA_IPFS_API_KEY }}:${{ secrets.INFURA_IPFS_API_SECRET }}" "https://ipfs.infura.io:5001/api/v0/pin/add?arg=$hash"
+              curl --request POST --url https://api.chainstack.com/v1/ipfs/pins/pinbycid \
+                   --header 'accept: application/json' \
+                   --header 'authorization: Bearer ${{ secrets.CHAINSTACK_API_KEY }}' \
+                   --header 'content-type: application/json' \
+                   --data "{\"cid\": \"$hash\"}"
+            done
+
+            # Write IPFS hashes to a file
+            echo "$ipfs_hashes" | sed 's/^/"/;s/$/"/' | paste -sd ',' > ipfs_hashes.txt
           fi
 
 
@@ -320,6 +335,16 @@ jobs:
           cat all_allocations.json >> README.md
           echo "\`\`\`" >> README.md
           cat all_allocations.json
+
+      - name: Add IPFS hashes to README if exists
+        run: |
+          if [ -f ipfs_hashes.txt ]; then
+            echo "" >> README.md
+            echo "## IPFS Hashes" >> README.md
+            echo "\`\`\`" >> README.md
+            cat ipfs_hashes.txt >> README.md
+            echo "\`\`\`" >> README.md
+          fi
 
       - uses: JS-DevTools/npm-publish@v3
         with:
