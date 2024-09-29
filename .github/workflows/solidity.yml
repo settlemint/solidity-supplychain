@@ -50,7 +50,7 @@ jobs:
         with:
           sarif: slither.sarif
           slither-args: --filter-paths "lib/" --filter-paths "node_modules/"
-          solc-version: ${{ vars.SOL_VERSION || '0.8.24' }}
+          solc-version: ${{ vars.SOL_VERSION || '0.8.27' }}
           fail-on: none
 
       - name: Upload findings to GitHub Advanced Security Dashboard
@@ -287,7 +287,7 @@ jobs:
 
       - name: Report code coverage
         if: github.event_name == 'pull_request'
-        uses: zgosalvez/github-actions-report-lcov@v4.1.15
+        uses: zgosalvez/github-actions-report-lcov@v4.1.16
         with:
           coverage-files: lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
