@@ -1,3 +1,5 @@
+fs_permissions = [{ access = "read", path = "ignition/deployments/chain-31337/deployed_addresses.json"}]
+
 [profile.ci]
   fuzz = { runs = 10_000 }
   verbosity = 4
@@ -30,3 +32,5 @@
   auto_detect_solc = false
   extra_output_files = [ "metadata" ]
   viaIR = true
+  fs_permissions = [{ access = "read", path = "ignition/deployments/chain-31337/deployed_addresses.json"}]
+
