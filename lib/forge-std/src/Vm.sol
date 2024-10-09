@@ -544,7 +544,7 @@ interface VmSafe {
     /// Gets all the recorded logs.
     function getRecordedLogs() external returns (Log[] memory logs);
 
-    /// Gets the gas used in the last call.
+    /// Gets the gas used in the last call from the callee perspective.
     function lastCallGas() external view returns (Gas memory gas);
 
     /// Loads a storage slot from an address.
@@ -1687,10 +1687,10 @@ interface Vm is VmSafe {
     /// Takes the snapshot ID to delete.
     /// Returns `true` if the snapshot was successfully deleted.
     /// Returns `false` if the snapshot does not exist.
-    function deleteSnapshot(uint256 snapshotId) external returns (bool success);
+    function deleteStateSnapshot(uint256 snapshotId) external returns (bool success);
 
     /// Removes _all_ snapshots previously created by `snapshot`.
-    function deleteSnapshots() external;
+    function deleteStateSnapshots() external;
 
     /// Sets `block.difficulty`.
     /// Not available on EVM versions from Paris onwards. Use `prevrandao` instead.
@@ -1781,14 +1781,14 @@ interface Vm is VmSafe {
     /// Takes the snapshot ID to revert to.
     /// Returns `true` if the snapshot was successfully reverted.
     /// Returns `false` if the snapshot does not exist.
-    /// **Note:** This does not automatically delete the snapshot. To delete the snapshot use `deleteSnapshot`.
-    function revertTo(uint256 snapshotId) external returns (bool success);
+    /// **Note:** This does not automatically delete the snapshot. To delete the snapshot use `deleteStateSnapshot`.
+    function revertToState(uint256 snapshotId) external returns (bool success);
 
     /// Revert the state of the EVM to a previous snapshot and automatically deletes the snapshots
     /// Takes the snapshot ID to revert to.
     /// Returns `true` if the snapshot was successfully reverted and deleted.
     /// Returns `false` if the snapshot does not exist.
-    function revertToAndDelete(uint256 snapshotId) external returns (bool success);
+    function revertToStateAndDelete(uint256 snapshotId) external returns (bool success);
 
     /// Revokes persistent status from the address, previously added via `makePersistent`.
     function revokePersistent(address account) external;
@@ -1826,10 +1826,23 @@ interface Vm is VmSafe {
     /// Sets the nonce of an account to an arbitrary value.
     function setNonceUnsafe(address account, uint64 newNonce) external;
 
+    /// Snapshot capture the gas usage of the last call by name from the callee perspective.
+    function snapshotGasLastCall(string calldata name) external returns (uint256 gasUsed);
+
+    /// Snapshot capture the gas usage of the last call by name in a group from the callee perspective.
+    function snapshotGasLastCall(string calldata group, string calldata name) external returns (uint256 gasUsed);
+
     /// Snapshot the current state of the evm.
     /// Returns the ID of the snapshot that was created.
-    /// To revert a snapshot use `revertTo`.
-    function snapshot() external returns (uint256 snapshotId);
+    /// To revert a snapshot use `revertToState`.
+    function snapshotState() external returns (uint256 snapshotId);
+
+    /// Snapshot capture an arbitrary numerical value by name.
+    /// The group name is derived from the contract name.
+    function snapshotValue(string calldata name, uint256 value) external;
+
+    /// Snapshot capture an arbitrary numerical value by name in a group.
+    function snapshotValue(string calldata group, string calldata name, uint256 value) external;
 
     /// Sets all subsequent calls' `msg.sender` to be the input address until `stopPrank` is called.
     function startPrank(address msgSender) external;
@@ -1837,8 +1850,25 @@ interface Vm is VmSafe {
     /// Sets all subsequent calls' `msg.sender` to be the input address until `stopPrank` is called, and the `tx.origin` to be the second input.
     function startPrank(address msgSender, address txOrigin) external;
 
+    /// Start a snapshot capture of the current gas usage by name.
+    /// The group name is derived from the contract name.
+    function startSnapshotGas(string calldata name) external;
+
+    /// Start a snapshot capture of the current gas usage by name in a group.
+    function startSnapshotGas(string calldata group, string calldata name) external;
+
     /// Resets subsequent calls' `msg.sender` to be `address(this)`.
     function stopPrank() external;
+
+    /// Stop the snapshot capture of the current gas by latest snapshot name, capturing the gas used since the start.
+    function stopSnapshotGas() external returns (uint256 gasUsed);
+
+    /// Stop the snapshot capture of the current gas usage by name, capturing the gas used since the start.
+    /// The group name is derived from the contract name.
+    function stopSnapshotGas(string calldata name) external returns (uint256 gasUsed);
+
+    /// Stop the snapshot capture of the current gas usage by name in a group, capturing the gas used since the start.
+    function stopSnapshotGas(string calldata group, string calldata name) external returns (uint256 gasUsed);
 
     /// Stores a value to an address' storage slot.
     function store(address target, bytes32 slot, bytes32 value) external;
@@ -1854,6 +1884,21 @@ interface Vm is VmSafe {
 
     /// Sets `block.timestamp`.
     function warp(uint256 newTimestamp) external;
+
+    /// `deleteSnapshot` is being deprecated in favor of `deleteStateSnapshot`. It will be removed in future versions.
+    function deleteSnapshot(uint256 snapshotId) external returns (bool success);
+
+    /// `deleteSnapshots` is being deprecated in favor of `deleteStateSnapshots`. It will be removed in future versions.
+    function deleteSnapshots() external;
+
+    /// `revertToAndDelete` is being deprecated in favor of `revertToStateAndDelete`. It will be removed in future versions.
+    function revertToAndDelete(uint256 snapshotId) external returns (bool success);
+
+    /// `revertTo` is being deprecated in favor of `revertToState`. It will be removed in future versions.
+    function revertTo(uint256 snapshotId) external returns (bool success);
+
+    /// `snapshot` is being deprecated in favor of `snapshotState`. It will be removed in future versions.
+    function snapshot() external returns (uint256 snapshotId);
 
     // ======== Testing ========
 
