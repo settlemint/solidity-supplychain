@@ -1,4 +1,4 @@
-FROM node:22.9.0-bookworm AS build
+FROM node:22.10.0 AS build
 
 RUN --mount=type=cache,sharing=locked,target=/var/cache/apt \
   export DEBIAN_FRONTEND=noninteractive && \
@@ -23,7 +23,7 @@ RUN npm install
 RUN forge build
 RUN npx hardhat compile
 
-FROM cgr.dev/chainguard/busybox:latest
+FROM busybox:1.37.0
 
 COPY --from=build /usecase /usecase
 COPY --from=build /root/.svm /usecase-svm
