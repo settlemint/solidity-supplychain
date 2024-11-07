@@ -295,7 +295,7 @@ jobs:
           update-comment: true
 
       - name: Inject slug/short variables
-        uses: rlespinasse/github-slug-action@v4
+        uses: rlespinasse/github-slug-action@v5
 
       - name: Package version
         id: package-version
@@ -375,7 +375,7 @@ jobs:
         with:
           commit_message: "chore: update package versions [skip ci]"
           branch: main
-          file_pattern: 'package.json README.md'
+          file_pattern: 'package.json README.md all_allocations.json'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3

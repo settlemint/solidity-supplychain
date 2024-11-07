@@ -20,7 +20,12 @@
     "dependencies"
   ],
   "rebaseWhen": "conflicted",
-  "packageRules": [],
+  "packageRules": [
+    {
+      "groupName": "OpenZeppelin packages",
+      "matchPackagePatterns": ["^@openzeppelin/"]
+    }
+  ],
   "hostRules": [
     {
       "timeout": 3000000
