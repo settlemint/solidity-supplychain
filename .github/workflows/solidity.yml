@@ -81,6 +81,7 @@ jobs:
           path: |
             ./node_modules
             ~/.npm
+            ~/.bun/install/cache
 
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
@@ -89,10 +90,12 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+
+      - uses: oven-sh/setup-bun@v2
 
       - name: Install Node dependencies
-        run: npm install
+        run: bun install
 
       - name: Install circom
         if: github.repository == 'settlemint/solidity-zeto'
@@ -106,7 +109,7 @@ jobs:
       - name: Install snarkjs
         if: github.repository == 'settlemint/solidity-zeto'
         run: |
-          npm install -g snarkjs@latest
+          bun install -g snarkjs@latest
 
       - name: Install zeto
         if: github.repository == 'settlemint/solidity-zeto'
@@ -114,7 +117,7 @@ jobs:
           git clone https://github.com/victoryeo/zeto.git
           cd zeto
           cd zkp/circuits
-          npm install
+          bun install
           cd ..
           circom circuits/anon_enc_nullifier.circom --output ./js/lib --sym --wasm
           circom circuits/anon_enc.circom --output ./js/lib --sym --wasm
@@ -368,7 +371,7 @@ jobs:
                 # 📦 Packages
                 | Package | Install |
                 | ------- | -------------------- |
-                | React | `npm i @${{ github.repository_owner }}/${{ github.repository }}@${{ env.VERSION }}` |
+                | React | `bun add @${{ github.repository_owner }}/${{ github.repository }}@${{ env.VERSION }}` |
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         if: ${{ env.TAG == 'latest' }}

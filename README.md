@@ -21,7 +21,7 @@ forge init my-project --template settlemint/solidity-supplychain
 Or if you want to use this set as a dependency of your own,
 
 ```shell
-npm install @settlemint/solidity-supplychain
+bun install @settlemint/solidity-supplychain
 ```
 
 ## DX: Foundry & Hardhat hybrid

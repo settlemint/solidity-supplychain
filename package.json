@@ -49,5 +49,8 @@
   "overrides": {
     "@graphprotocol/graph-cli": "0.88.0",
     "@graphprotocol/graph-ts": "0.35.1"
-  }
+  },
+  "trustedDependencies": [
+    "protobufjs"
+  ]
 }
