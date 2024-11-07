@@ -25,7 +25,7 @@ USER root
 
 RUN bun install
 RUN forge build
-RUN bunx hardhat compile
+RUN bun hardhat compile
 
 FROM busybox:1.37.0
 
