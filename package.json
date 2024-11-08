@@ -51,6 +51,8 @@
     "@graphprotocol/graph-ts": "0.35.1"
   },
   "trustedDependencies": [
-    "protobufjs"
+    "keccak",
+    "protobufjs",
+    "secp256k1"
   ]
 }

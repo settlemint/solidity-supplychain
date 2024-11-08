@@ -374,11 +374,18 @@ jobs:
                 | React | `bun add @${{ github.repository_owner }}/${{ github.repository }}@${{ env.VERSION }}` |
 
       - uses: stefanzweifel/git-auto-commit-action@v5
-        if: ${{ env.TAG == 'latest' }}
+        if: env.TAG == 'latest' && github.repository != 'settlemint/solidity-predeployed'
         with:
           commit_message: "chore: update package versions [skip ci]"
           branch: main
           file_pattern: 'package.json README.md all_allocations.json'
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        if: env.TAG == 'latest' && github.repository == 'settlemint/solidity-predeployed'
+        with:
+          commit_message: "chore: update package versions [skip ci]"
+          branch: main
+          file_pattern: 'all_allocations.json'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
