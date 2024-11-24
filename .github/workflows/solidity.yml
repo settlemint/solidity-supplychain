@@ -290,7 +290,7 @@ jobs:
 
       - name: Report code coverage
         if: github.event_name == 'pull_request'
-        uses: zgosalvez/github-actions-report-lcov@v4.1.19
+        uses: zgosalvez/github-actions-report-lcov@4.1.20
         continue-on-error: true
         with:
           coverage-files: lcov.info
