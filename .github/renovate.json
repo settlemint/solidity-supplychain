@@ -23,7 +23,21 @@
   "packageRules": [
     {
       "groupName": "OpenZeppelin packages",
-      "matchPackagePatterns": ["^@openzeppelin/"]
+      "matchPackageNames": [
+        "/^@openzeppelin//"
+      ]
+    },
+    {
+      "groupName": "Hardhat packages",
+      "matchPackageNames": [
+        "/hardhat/"
+      ]
+    },
+    {
+      "groupName": "The Graph packages",
+      "matchPackageNames": [
+        "/graphprotocol/"
+      ]
     }
   ],
   "hostRules": [
