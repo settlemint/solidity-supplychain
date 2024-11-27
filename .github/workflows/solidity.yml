@@ -69,11 +69,21 @@ jobs:
     #runs-on: ubuntu-latest
     runs-on: namespace-profile-btp-scs
     steps:
+      - name: Setup 1Password
+        uses: 1password/load-secrets-action/configure@v2
+        with:
+          service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+
+      - name: Load secrets
+        uses: 1password/load-secrets-action@v2
+        env:
+          NPM_TOKEN: op://platform/npmjs/credential
+          PAT_TOKEN: op://platform/github-commit-pat/credential
+
       - name: Checkout
         uses: namespacelabs/nscloud-checkout-action@v5
         with:
-          submodules: recursive
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ env.PAT_TOKEN }}
 
       - name: Setup caches
         uses: namespacelabs/nscloud-cache-action@v1
@@ -96,119 +106,6 @@ jobs:
 
       - name: Install Node dependencies
         run: bun install
-
-      - name: Install circom
-        if: github.repository == 'settlemint/solidity-zeto'
-        run: |
-          curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
-          git clone https://github.com/iden3/circom.git
-          cd circom
-          cargo build --release
-          cargo install --path circom
-
-      - name: Install snarkjs
-        if: github.repository == 'settlemint/solidity-zeto'
-        run: |
-          bun install -g snarkjs@latest
-
-      - name: Install zeto
-        if: github.repository == 'settlemint/solidity-zeto'
-        run: |
-          git clone https://github.com/victoryeo/zeto.git
-          cd zeto
-          cd zkp/circuits
-          bun install
-          cd ..
-          circom circuits/anon_enc_nullifier.circom --output ./js/lib --sym --wasm
-          circom circuits/anon_enc.circom --output ./js/lib --sym --wasm
-          circom circuits/anon_nullifier.circom --output ./js/lib --sym --wasm
-          circom circuits/anon.circom --output ./js/lib --sym --wasm
-          circom circuits/check-nullifiers.circom --output ./js/lib --sym --wasm
-          circom circuits/nf_anon_nullifier.circom --output ./js/lib --sym --wasm
-          circom circuits/nf_anon.circom --output ./js/lib --sym --wasm
-
-      - name: Create folders
-        if: github.repository == 'settlemint/solidity-zeto'
-        run: |
-          mkdir -p ./zeto/proving-keys
-          mkdir -p ./zeto/contracts-lib
-
-      - name: Download ptau
-        if: github.repository == 'settlemint/solidity-zeto'
-        working-directory: zeto/proving-keys/
-        run: |
-          wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_12.ptau
-          wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_13.ptau
-          wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_16.ptau
-          wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_11.ptau
-          wget -nv https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_15.ptau
-
-      - name: Generate R1CS circuit format
-        if: github.repository == 'settlemint/solidity-zeto'
-        working-directory: zeto/zkp/
-        run: |
-          circom circuits/anon_enc_nullifier.circom --output ../proving-keys --r1cs
-          circom circuits/anon_enc.circom --output ../proving-keys --r1cs
-          circom circuits/anon_nullifier.circom --output ../proving-keys --r1cs
-          circom circuits/anon.circom --output ../proving-keys --r1cs
-          circom circuits/check-nullifiers.circom --output ../proving-keys --r1cs
-          circom circuits/nf_anon_nullifier.circom --output ../proving-keys --r1cs
-          circom circuits/nf_anon.circom --output ../proving-keys --r1cs
-
-      - name: Generate proving keys
-        if: github.repository == 'settlemint/solidity-zeto'
-        working-directory: zeto/zkp/
-        run: |
-          snarkjs groth16 setup ../proving-keys/anon.r1cs ../proving-keys/powersOfTau28_hez_final_12.ptau ../proving-keys/anon.zkey
-          snarkjs groth16 setup ../proving-keys/anon_enc.r1cs ../proving-keys/powersOfTau28_hez_final_13.ptau ../proving-keys/anon_enc.zkey
-          snarkjs groth16 setup ../proving-keys/anon_nullifier.r1cs ../proving-keys/powersOfTau28_hez_final_16.ptau ../proving-keys/anon_nullifier.zkey
-          snarkjs groth16 setup ../proving-keys/anon_enc_nullifier.r1cs ../proving-keys/powersOfTau28_hez_final_16.ptau ../proving-keys/anon_enc_nullifier.zkey
-          snarkjs groth16 setup ../proving-keys/nf_anon.r1cs ../proving-keys/powersOfTau28_hez_final_11.ptau ../proving-keys/nf_anon.zkey
-          snarkjs groth16 setup ../proving-keys/nf_anon_nullifier.r1cs ../proving-keys/powersOfTau28_hez_final_15.ptau ../proving-keys/nf_anon_nullifier.zkey
-
-      - name: Per-circuit set up ceremony on proving keys
-        if: github.repository == 'settlemint/solidity-zeto'
-        working-directory: zeto/zkp/
-        run: |
-          snarkjs zkey contribute ../proving-keys/anon.zkey ../proving-keys/anon_new.zkey --name="contribution" -v -e="random entropy"
-          snarkjs zkey contribute ../proving-keys/anon_enc.zkey ../proving-keys/anon_enc_new.zkey --name="contribution" -v -e="random entropy"
-          snarkjs zkey contribute ../proving-keys/anon_nullifier.zkey ../proving-keys/anon_nullifier_new.zkey --name="contribution" -v -e="random entropy"
-          snarkjs zkey contribute ../proving-keys/anon_enc_nullifier.zkey ../proving-keys/anon_enc_nullifier_new.zkey --name="contribution" -v -e="random entropy"
-          snarkjs zkey contribute ../proving-keys/nf_anon.zkey ../proving-keys/nf_anon_new.zkey --name="contribution" -v -e="random entropy"
-          snarkjs zkey contribute ../proving-keys/nf_anon_nullifier.zkey ../proving-keys/nf_anon_nullifier_new.zkey --name="contribution" -v -e="random entropy"
-
-      - name: Generate verfication keys
-        if: github.repository == 'settlemint/solidity-zeto'
-        working-directory: zeto/zkp/
-        run: |
-          snarkjs zkey export verificationkey ../proving-keys/anon_new.zkey ../proving-keys/anon-vkey.json
-          snarkjs zkey export verificationkey ../proving-keys/anon_enc_new.zkey ../proving-keys/anon_enc-vkey.json
-          snarkjs zkey export verificationkey ../proving-keys/anon_nullifier_new.zkey ../proving-keys/anon_nullifier-vkey.json
-          snarkjs zkey export verificationkey ../proving-keys/anon_enc_nullifier_new.zkey ../proving-keys/anon_enc_nullifier-vkey.json
-          snarkjs zkey export verificationkey ../proving-keys/nf_anon_new.zkey ../proving-keys/nf_anon-vkey.json
-          snarkjs zkey export verificationkey ../proving-keys/nf_anon_nullifier_new.zkey ../proving-keys/nf_anon_nullifier-vkey.json
-
-      - name: Generate solidity verifier library
-        if: github.repository == 'settlemint/solidity-zeto'
-        working-directory: zeto/zkp/
-        run: |
-          snarkjs zkey export solidityverifier ../proving-keys/anon_new.zkey ../contracts-lib/verifier_anon.sol
-          snarkjs zkey export solidityverifier ../proving-keys/anon_enc_new.zkey ../contracts-lib/verifier_anon_enc.sol
-          snarkjs zkey export solidityverifier ../proving-keys/anon_nullifier_new.zkey ../contracts-lib/verifier_anon_nullifier.sol
-          snarkjs zkey export solidityverifier ../proving-keys/anon_enc_nullifier_new.zkey ../contracts-lib/verifier_anon_enc_nullifier.sol
-          snarkjs zkey export solidityverifier ../proving-keys/nf_anon_new.zkey ../contracts-lib/verifier_nf_anon.sol
-          snarkjs zkey export solidityverifier ../proving-keys/nf_anon_nullifier_new.zkey ../contracts-lib/verifier_nf_anon_nullifier.sol
-
-      - name: Edit solidity files
-        if: github.repository == 'settlemint/solidity-zeto'
-        working-directory: zeto/contracts-lib/
-        run: |
-            sed 's/Groth16Verifier/Groth16Verifier_Anon/' verifier_anon.sol > ../solidity/contracts/lib/verifier_anon.sol
-            sed 's/Groth16Verifier/Groth16Verifier_AnonEnc/' verifier_anon_enc.sol > ../solidity/contracts/lib/verifier_anon_enc.sol
-            sed 's/Groth16Verifier/Groth16Verifier_AnonNullifier/' verifier_anon_nullifier.sol > ../solidity/contracts/lib/verifier_anon_nullifier.sol
-            sed 's/Groth16Verifier/Groth16Verifier_AnonEncNullifier/' verifier_anon_enc_nullifier.sol > ../solidity/contracts/lib/verifier_anon_enc_nullifier.sol
-            sed 's/Groth16Verifier/Groth16Verifier_NFAnon/' verifier_nf_anon.sol > ../solidity/contracts/lib/verifier_nf_anon.sol
-            sed 's/Groth16Verifier/Groth16Verifier_NFAnonNullifier/' verifier_nf_anon_nullifier.sol > ../solidity/contracts/lib/verifier_nf_anon_nullifier.sol
 
       - name: Run Forge build
         run: |
@@ -275,14 +172,6 @@ jobs:
 
             echo "IPFS hashes: $ipfs_hashes"
 
-            for hash in $ipfs_hashes; do
-              echo "Processing IPFS hash: $hash"
-              echo "Pinning $hash to Infura"
-              curl -s -X POST -u "${{ secrets.INFURA_IPFS_API_KEY }}:${{ secrets.INFURA_IPFS_API_SECRET }}" "https://ipfs.infura.io:5001/api/v0/pin/add?arg=$hash" || true
-              echo "Pinning $hash to Chainstack"
-              curl -s --request POST --url https://api.chainstack.com/v1/ipfs/pins/pinbycid --header 'accept: application/json' --header 'authorization: Bearer ${{ secrets.CHAINSTACK_API_KEY }}' --header 'content-type: application/json' --data "{\"bucket_id\": \"BUCK-8412-8292-8457\", \"cid\": \"$hash\"}" || true
-            done
-
             # Write IPFS hashes to a file
             echo "$ipfs_hashes" | sed 's/^/"/;s/$/"/' | paste -sd ',' > ipfs_hashes.txt
           fi
@@ -290,7 +179,7 @@ jobs:
 
       - name: Report code coverage
         if: github.event_name == 'pull_request'
-        uses: zgosalvez/github-actions-report-lcov@v4.1.19
+        uses: zgosalvez/github-actions-report-lcov@4.1.20
         continue-on-error: true
         with:
           coverage-files: lcov.info
@@ -355,7 +244,7 @@ jobs:
 
       - uses: JS-DevTools/npm-publish@v3
         with:
-          token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ env.NPM_TOKEN }}
           package: ./package.json
           access: public
           provenance: false
