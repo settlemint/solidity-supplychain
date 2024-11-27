@@ -13,8 +13,7 @@
     ":combinePatchMinorReleases",
     ":prConcurrentLimitNone",
     ":prHourlyLimitNone",
-    "security:openssf-scorecard",
-    "schedule:nonOfficeHours"
+    "security:openssf-scorecard"
   ],
   "labels": [
     "dependencies"
