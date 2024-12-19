@@ -18,7 +18,7 @@
     {
       "label": "Foundry - Build",
       "type": "shell",
-      "command": "btp-scs foundry build",
+      "command": "bunx settlemint scs foundry build",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -28,7 +28,7 @@
     {
       "label": "Hardhat - Build",
       "type": "shell",
-      "command": "btp-scs hardhat build",
+      "command": "bunx settlemint scs hardhat build",
       "group": {
         "kind": "build",
         "isDefault": false
@@ -38,59 +38,59 @@
     {
       "label": "Foundry - Test",
       "type": "shell",
-      "command": "btp-scs foundry test",
+      "command": "bunx settlemint scs foundry test",
       "group": "test",
       "problemMatcher": []
     },
     {
       "label": "Hardhat - Test",
       "type": "shell",
-      "command": "btp-scs hardhat test",
+      "command": "bunx settlemint scs hardhat test",
       "group": "test",
       "problemMatcher": []
     },
     {
       "label": "Foundry - Format",
       "type": "shell",
-      "command": "btp-scs foundry format",
+      "command": "bunx settlemint scs foundry format",
       "problemMatcher": []
     },
     {
       "label": "Foundry - Start network",
       "type": "shell",
-      "command": "btp-scs foundry network",
+      "command": "bunx settlemint scs foundry network",
       "problemMatcher": [],
       "isBackground": true
     },
     {
       "label": "Hardhat - Start network",
       "type": "shell",
-      "command": "btp-scs hardhat network",
+      "command": "bunx settlemint scs hardhat network",
       "problemMatcher": [],
       "isBackground": true,
     },
     {
       "label": "Hardhat - Deploy to local network",
       "type": "shell",
-      "command": "btp-scs hardhat deploy local ${input:extra-deployment} -m ${input:deployment-module}",
+      "command": "bunx settlemint scs hardhat deploy local ${input:extra-deployment} -m ${input:deployment-module}",
       "problemMatcher": []
     },
     {
       "label": "Hardhat - Reset & Deploy to local network",
       "type": "shell",
-      "command": "btp-scs hardhat deploy local --reset ${input:extra-deployment} -m ${input:deployment-module}",
+      "command": "bunx settlemint scs hardhat deploy local --reset ${input:extra-deployment} -m ${input:deployment-module}",
       "problemMatcher": []
     },
     {
       "label": "Hardhat - Deploy to platform network",
       "type": "shell",
-      "command": "btp-scs hardhat deploy remote ${input:extra-deployment} -m ${input:deployment-module}",
+      "command": "bunx settlemint scs hardhat deploy remote ${input:extra-deployment} -m ${input:deployment-module}",
       "problemMatcher": []
     },
     {
       "label": "Hardhat - Reset & Deploy to platform network",
       "type": "shell",
-      "command": "btp-scs hardhat deploy remote --reset ${input:extra-deployment} -m ${input:deployment-module}",
+      "command": "bunx settlemint scs hardhat deploy remote --reset ${input:extra-deployment} -m ${input:deployment-module}",
       "problemMatcher": []
     },
     {
