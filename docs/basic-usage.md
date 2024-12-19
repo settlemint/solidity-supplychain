@@ -52,7 +52,15 @@ bunx settlemint scs hardhat deploy local -m ignition/modules/main.ts
 
 ## Deploy to platform network
 
-You can also deploy your contracts to the network running on the platform by executing the following command:
+To deploy your contracts to the platform network, first log in using the SDK:
+
+```shell
+bunx settlemint login
+```
+
+You only need to run this `login` command once.
+
+Then, you can deploy your contracts using the following command:
 
 ```shell
 bunx settlemint scs hardhat deploy remote -m ignition/modules/main.ts
@@ -63,5 +71,5 @@ bunx settlemint scs hardhat deploy remote -m ignition/modules/main.ts
 To get info about the tasks, run:
 
 ```shell
-btp-scs --help
+bunx settlemint scs --help
 ```
