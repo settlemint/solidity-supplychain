@@ -124,10 +124,6 @@ jobs:
         run: |
           npx hardhat test
 
-      - name: Setup LCOV
-        if: github.ref_name != 'main'
-        uses: hrishikesh-kadam/setup-lcov@v1
-
       - name: Run Forge Coverage
         if: github.ref_name != 'main'
         run: |
@@ -175,16 +171,6 @@ jobs:
             # Write IPFS hashes to a file
             echo "$ipfs_hashes" | sed 's/^/"/;s/$/"/' | paste -sd ',' > ipfs_hashes.txt
           fi
-
-
-      - name: Report code coverage
-        if: github.event_name == 'pull_request'
-        uses: zgosalvez/github-actions-report-lcov@4.1.21
-        continue-on-error: true
-        with:
-          coverage-files: lcov.info
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          update-comment: true
 
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v5
