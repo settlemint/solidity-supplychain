@@ -1,6 +1,6 @@
 FROM node:22.12.0 AS build
 
-COPY --from=oven/bun:1.1.38-debian --chmod=0777 /usr/local/bin/bun /bin/bun
+COPY --from=oven/bun:1.1.40-debian --chmod=0777 /usr/local/bin/bun /bin/bun
 ENV BUN_RUNTIME_TRANSPILER_CACHE_PATH=0
 ENV BUN_INSTALL_BIN=/bin
 
@@ -23,7 +23,7 @@ WORKDIR /usecase
 
 USER root
 
-RUN bun install
+RUN bun install --save-text-lockfile
 RUN if [ -f "scripts/decompress.js" ]; then bun scripts/decompress.js; fi
 RUN forge build
 RUN bun hardhat compile
