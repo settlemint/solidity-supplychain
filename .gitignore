@@ -28,6 +28,9 @@ out/
 # Dotenv file
 .env
 
+# Local env file
+**/.env.local
+
 # Subgraphs
 generated
 build
