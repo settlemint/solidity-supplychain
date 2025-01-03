@@ -96,13 +96,13 @@
     {
       "label": "The Graph - Codegen the subgraph types",
       "type": "shell",
-      "command": "btp-scs subgraph codegen",
+      "command": "bunx settlemint scs subgraph codegen",
       "problemMatcher": []
     },
     {
       "label": "The Graph - Build the subgraph",
       "type": "shell",
-      "command": "btp-scs subgraph build",
+      "command": "bunx settlemint scs subgraph build",
       "problemMatcher": [],
       "group": {
         "kind": "build",
@@ -112,7 +112,7 @@
     {
       "label": "The Graph - Deploy or update the subgraph",
       "type": "shell",
-      "command": "btp-scs subgraph deploy",
+      "command": "bunx settlemint scs subgraph deploy",
       "problemMatcher": []
     }
   ],
