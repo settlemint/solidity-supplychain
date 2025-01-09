@@ -54,6 +54,7 @@ jobs:
           fail-on: none
 
       - name: Upload findings to GitHub Advanced Security Dashboard
+        continue-on-error: true
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ${{ steps.slither.outputs.sarif }}
