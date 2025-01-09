@@ -16,6 +16,11 @@
   ],
   "tasks": [
     {
+      "label": "SettleMint - Login",
+      "type": "shell",
+      "command": "bunx settlemint login",
+    },
+    {
       "label": "Foundry - Build",
       "type": "shell",
       "command": "bunx settlemint scs foundry build",
