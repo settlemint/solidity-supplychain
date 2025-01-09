@@ -15,28 +15,20 @@
     ":prHourlyLimitNone",
     "security:openssf-scorecard"
   ],
-  "labels": [
-    "dependencies"
-  ],
-  "rebaseWhen": "conflicted",
+  "labels": ["dependencies"],
+  "rebaseWhen": "auto",
   "packageRules": [
     {
       "groupName": "OpenZeppelin packages",
-      "matchPackageNames": [
-        "/^@openzeppelin//"
-      ]
+      "matchPackageNames": ["/^@openzeppelin//"]
     },
     {
       "groupName": "Hardhat packages",
-      "matchPackageNames": [
-        "/hardhat/"
-      ]
+      "matchPackageNames": ["/hardhat/"]
     },
     {
       "groupName": "The Graph packages",
-      "matchPackageNames": [
-        "/graphprotocol/"
-      ]
+      "matchPackageNames": ["/graphprotocol/"]
     }
   ],
   "hostRules": [
