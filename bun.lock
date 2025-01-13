@@ -15,6 +15,9 @@
         "hardhat": "2.22.17",
         "solhint": "5.0.4",
       },
+      "devDependencies": {
+        "@settlemint/sdk-cli": "1.0.0",
+      },
     },
   },
   "trustedDependencies": [
@@ -284,6 +287,8 @@
     "@sentry/types": ["@sentry/types@5.30.0", "", {}, "sha512-R8xOqlSTZ+htqrfteCWU5Nk0CDN5ApUTvrlvBuiH1DyP6czDZ4ktbZB0hAgBlVcK0U+qpD3ag3Tqqpa5Q67rPw=="],
 
     "@sentry/utils": ["@sentry/utils@5.30.0", "", { "dependencies": { "@sentry/types": "5.30.0", "tslib": "^1.9.3" } }, "sha512-zaYmoH0NWWtvnJjC9/CBseXMtKHm/tm40sz3YfJRxeQjyzRqNQPgivpd9R/oDJCYj999mzdW382p/qi2ypjLww=="],
+
+    "@settlemint/sdk-cli": ["@settlemint/sdk-cli@1.0.0", "", { "dependencies": { "hardhat": "2.22.17" }, "bin": { "settlemint": "dist/cli.js" } }, "sha512-PtBHg44DCA8Zu8mV/xnzOBJOw1aB21TCtMQDuNdStso4xMiswtmFoaJAMLgBksNcEmPk7OQ+aq9vnYKLkqgj5Q=="],
 
     "@sindresorhus/is": ["@sindresorhus/is@5.6.0", "", {}, "sha512-TV7t8GKYaJWsn00tFDqBw8+Uqmr8A0fRU1tvTQhyZzGv0sJCGRQL3JGMI3ucuKo3XIZdUP+Lx7/gh2t3lewy7g=="],
 
