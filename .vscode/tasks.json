@@ -18,7 +18,7 @@
     {
       "label": "SettleMint - Login",
       "type": "shell",
-      "command": "bunx settlemint login --accept-defaults",
+      "command": "bunx settlemint login",
     },
     {
       "label": "Foundry - Build",

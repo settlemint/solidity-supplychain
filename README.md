@@ -46,7 +46,7 @@ Hardhat consists of:
 ## Documentation
 
 - Additional documentation can be found in the [docs folder](./docs).
-- [SettleMint Documentation](https://console.settlemint.com/documentation/docs/using-platform/dev-tools/code-studio/smart-contract-sets/deploying-a-contract/)
+- [SettleMint Documentation](https://console.settlemint.com/documentation/docs/using-platform/integrated-development-environment/)
 - [Foundry Documentation](https://book.getfoundry.sh/)
 - [Hardhat Documentation](https://hardhat.org/hardhat-runner/docs/getting-started)
 

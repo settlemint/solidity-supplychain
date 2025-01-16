@@ -15,9 +15,6 @@
         "hardhat": "2.22.18",
         "solhint": "5.0.4",
       },
-      "devDependencies": {
-        "@settlemint/sdk-cli": "1.0.0",
-      },
     },
   },
   "trustedDependencies": [
@@ -287,8 +284,6 @@
     "@sentry/types": ["@sentry/types@5.30.0", "", {}, "sha512-R8xOqlSTZ+htqrfteCWU5Nk0CDN5ApUTvrlvBuiH1DyP6czDZ4ktbZB0hAgBlVcK0U+qpD3ag3Tqqpa5Q67rPw=="],
 
     "@sentry/utils": ["@sentry/utils@5.30.0", "", { "dependencies": { "@sentry/types": "5.30.0", "tslib": "^1.9.3" } }, "sha512-zaYmoH0NWWtvnJjC9/CBseXMtKHm/tm40sz3YfJRxeQjyzRqNQPgivpd9R/oDJCYj999mzdW382p/qi2ypjLww=="],
-
-    "@settlemint/sdk-cli": ["@settlemint/sdk-cli@1.0.0", "", { "dependencies": { "hardhat": "2.22.17" }, "bin": { "settlemint": "dist/cli.js" } }, "sha512-PtBHg44DCA8Zu8mV/xnzOBJOw1aB21TCtMQDuNdStso4xMiswtmFoaJAMLgBksNcEmPk7OQ+aq9vnYKLkqgj5Q=="],
 
     "@sindresorhus/is": ["@sindresorhus/is@5.6.0", "", {}, "sha512-TV7t8GKYaJWsn00tFDqBw8+Uqmr8A0fRU1tvTQhyZzGv0sJCGRQL3JGMI3ucuKo3XIZdUP+Lx7/gh2t3lewy7g=="],
 
@@ -1552,8 +1547,6 @@
 
     "@pnpm/network.ca-file/graceful-fs": ["graceful-fs@4.2.10", "", {}, "sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA=="],
 
-    "@settlemint/sdk-cli/hardhat": ["hardhat@2.22.17", "", { "dependencies": { "@ethersproject/abi": "^5.1.2", "@metamask/eth-sig-util": "^4.0.0", "@nomicfoundation/edr": "^0.6.5", "@nomicfoundation/ethereumjs-common": "4.0.4", "@nomicfoundation/ethereumjs-tx": "5.0.4", "@nomicfoundation/ethereumjs-util": "9.0.4", "@nomicfoundation/solidity-analyzer": "^0.1.0", "@sentry/node": "^5.18.1", "@types/bn.js": "^5.1.0", "@types/lru-cache": "^5.1.0", "adm-zip": "^0.4.16", "aggregate-error": "^3.0.0", "ansi-escapes": "^4.3.0", "boxen": "^5.1.2", "chokidar": "^4.0.0", "ci-info": "^2.0.0", "debug": "^4.1.1", "enquirer": "^2.3.0", "env-paths": "^2.2.0", "ethereum-cryptography": "^1.0.3", "ethereumjs-abi": "^0.6.8", "find-up": "^5.0.0", "fp-ts": "1.19.3", "fs-extra": "^7.0.1", "immutable": "^4.0.0-rc.12", "io-ts": "1.10.4", "json-stream-stringify": "^3.1.4", "keccak": "^3.0.2", "lodash": "^4.17.11", "mnemonist": "^0.38.0", "mocha": "^10.0.0", "p-map": "^4.0.0", "picocolors": "^1.1.0", "raw-body": "^2.4.1", "resolve": "1.17.0", "semver": "^6.3.0", "solc": "0.8.26", "source-map-support": "^0.5.13", "stacktrace-parser": "^0.1.10", "tinyglobby": "^0.2.6", "tsort": "0.0.1", "undici": "^5.14.0", "uuid": "^8.3.2", "ws": "^7.4.6" }, "peerDependencies": { "ts-node": "*", "typescript": "*" }, "optionalPeers": ["ts-node", "typescript"], "bin": { "hardhat": "internal/cli/bootstrap.js" } }, "sha512-tDlI475ccz4d/dajnADUTRc1OJ3H8fpP9sWhXhBPpYsQOg8JHq5xrDimo53UhWPl7KJmAeDCm1bFG74xvpGRpg=="],
-
     "@types/bn.js/@types/node": ["@types/node@12.20.55", "", {}, "sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ=="],
 
     "@types/concat-stream/@types/node": ["@types/node@12.20.55", "", {}, "sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ=="],
@@ -1814,20 +1807,6 @@
 
     "@oclif/plugin-not-found/@oclif/core/debug": ["debug@4.4.0", "", { "dependencies": { "ms": "^2.1.3" } }, "sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA=="],
 
-    "@settlemint/sdk-cli/hardhat/@nomicfoundation/edr": ["@nomicfoundation/edr@0.6.5", "", { "dependencies": { "@nomicfoundation/edr-darwin-arm64": "0.6.5", "@nomicfoundation/edr-darwin-x64": "0.6.5", "@nomicfoundation/edr-linux-arm64-gnu": "0.6.5", "@nomicfoundation/edr-linux-arm64-musl": "0.6.5", "@nomicfoundation/edr-linux-x64-gnu": "0.6.5", "@nomicfoundation/edr-linux-x64-musl": "0.6.5", "@nomicfoundation/edr-win32-x64-msvc": "0.6.5" } }, "sha512-tAqMslLP+/2b2sZP4qe9AuGxG3OkQ5gGgHE4isUuq6dUVjwCRPFhAOhpdFl+OjY5P3yEv3hmq9HjUGRa2VNjng=="],
-
-    "@settlemint/sdk-cli/hardhat/chokidar": ["chokidar@4.0.3", "", { "dependencies": { "readdirp": "^4.0.1" } }, "sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA=="],
-
-    "@settlemint/sdk-cli/hardhat/debug": ["debug@4.3.4", "", { "dependencies": { "ms": "2.1.2" } }, "sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ=="],
-
-    "@settlemint/sdk-cli/hardhat/fs-extra": ["fs-extra@7.0.1", "", { "dependencies": { "graceful-fs": "^4.1.2", "jsonfile": "^4.0.0", "universalify": "^0.1.0" } }, "sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw=="],
-
-    "@settlemint/sdk-cli/hardhat/immutable": ["immutable@4.2.1", "", {}, "sha512-7WYV7Q5BTs0nlQm7tl92rDYYoyELLKHoDMBKhrxEoiV4mrfVdRz8hzPiYOzH7yWjzoVEamxRuAqhxL2PLRwZYQ=="],
-
-    "@settlemint/sdk-cli/hardhat/semver": ["semver@6.3.1", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA=="],
-
-    "@settlemint/sdk-cli/hardhat/undici": ["undici@5.28.4", "", { "dependencies": { "@fastify/busboy": "^2.0.0" } }, "sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g=="],
-
     "concat-stream/readable-stream/safe-buffer": ["safe-buffer@5.1.2", "", {}, "sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g=="],
 
     "concat-stream/readable-stream/string_decoder": ["string_decoder@1.1.1", "", { "dependencies": { "safe-buffer": "~5.1.0" } }, "sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg=="],
@@ -1927,26 +1906,6 @@
     "@metamask/eth-sig-util/ethereumjs-util/@types/bn.js/@types/node": ["@types/node@12.20.55", "", {}, "sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ=="],
 
     "@nomiclabs/hardhat-solhint/solhint/glob/minimatch": ["minimatch@5.1.6", "", { "dependencies": { "brace-expansion": "^2.0.1" } }, "sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g=="],
-
-    "@settlemint/sdk-cli/hardhat/@nomicfoundation/edr/@nomicfoundation/edr-darwin-arm64": ["@nomicfoundation/edr-darwin-arm64@0.6.5", "", {}, "sha512-A9zCCbbNxBpLgjS1kEJSpqxIvGGAX4cYbpDYCU2f3jVqOwaZ/NU761y1SvuCRVpOwhoCXqByN9b7HPpHi0L4hw=="],
-
-    "@settlemint/sdk-cli/hardhat/@nomicfoundation/edr/@nomicfoundation/edr-darwin-x64": ["@nomicfoundation/edr-darwin-x64@0.6.5", "", {}, "sha512-x3zBY/v3R0modR5CzlL6qMfFMdgwd6oHrWpTkuuXnPFOX8SU31qq87/230f4szM+ukGK8Hi+mNq7Ro2VF4Fj+w=="],
-
-    "@settlemint/sdk-cli/hardhat/@nomicfoundation/edr/@nomicfoundation/edr-linux-arm64-gnu": ["@nomicfoundation/edr-linux-arm64-gnu@0.6.5", "", {}, "sha512-HGpB8f1h8ogqPHTyUpyPRKZxUk2lu061g97dOQ/W4CxevI0s/qiw5DB3U3smLvSnBHKOzYS1jkxlMeGN01ky7A=="],
-
-    "@settlemint/sdk-cli/hardhat/@nomicfoundation/edr/@nomicfoundation/edr-linux-arm64-musl": ["@nomicfoundation/edr-linux-arm64-musl@0.6.5", "", {}, "sha512-ESvJM5Y9XC03fZg9KaQg3Hl+mbx7dsSkTIAndoJS7X2SyakpL9KZpOSYrDk135o8s9P9lYJdPOyiq+Sh+XoCbQ=="],
-
-    "@settlemint/sdk-cli/hardhat/@nomicfoundation/edr/@nomicfoundation/edr-linux-x64-gnu": ["@nomicfoundation/edr-linux-x64-gnu@0.6.5", "", {}, "sha512-HCM1usyAR1Ew6RYf5AkMYGvHBy64cPA5NMbaeY72r0mpKaH3txiMyydcHibByOGdQ8iFLWpyUdpl1egotw+Tgg=="],
-
-    "@settlemint/sdk-cli/hardhat/@nomicfoundation/edr/@nomicfoundation/edr-linux-x64-musl": ["@nomicfoundation/edr-linux-x64-musl@0.6.5", "", {}, "sha512-nB2uFRyczhAvWUH7NjCsIO6rHnQrof3xcCe6Mpmnzfl2PYcGyxN7iO4ZMmRcQS7R1Y670VH6+8ZBiRn8k43m7A=="],
-
-    "@settlemint/sdk-cli/hardhat/@nomicfoundation/edr/@nomicfoundation/edr-win32-x64-msvc": ["@nomicfoundation/edr-win32-x64-msvc@0.6.5", "", {}, "sha512-B9QD/4DSSCFtWicO8A3BrsnitO1FPv7axB62wq5Q+qeJ50yJlTmyeGY3cw62gWItdvy2mh3fRM6L1LpnHiB77A=="],
-
-    "@settlemint/sdk-cli/hardhat/debug/ms": ["ms@2.1.2", "", {}, "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="],
-
-    "@settlemint/sdk-cli/hardhat/fs-extra/jsonfile": ["jsonfile@4.0.0", "", { "optionalDependencies": { "graceful-fs": "^4.1.6" } }, "sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg=="],
-
-    "@settlemint/sdk-cli/hardhat/fs-extra/universalify": ["universalify@0.1.2", "", {}, "sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg=="],
 
     "eth-gas-reporter/cli-table3/string-width/is-fullwidth-code-point": ["is-fullwidth-code-point@2.0.0", "", {}, "sha512-VHskAKYM8RfSFXwee5t5cbN5PZeq1Wrh6qd5bkyiXIf6UQcN6w/A0eXM9r6t8d+GYOh+o6ZhiEnb88LN/Y8m2w=="],
 
