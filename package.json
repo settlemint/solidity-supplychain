@@ -51,7 +51,10 @@
     "@graphprotocol/graph-ts": "0.37.0",
     "elliptic": "6.6.1",
     "ws": "8.18.0",
-    "adm-zip": "0.5.16"
+    "adm-zip": "0.5.16",
+    "cross-spawn": "7.0.5",
+    "semver": "7.5.2",
+    "undici": "7.3.0"
   },
   "trustedDependencies": [
     "keccak",
