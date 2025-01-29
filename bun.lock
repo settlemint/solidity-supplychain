@@ -28,7 +28,7 @@
     "adm-zip": "0.5.16",
     "@graphprotocol/graph-ts": "0.37.0",
     "cookie": "1.0.2",
-    "semver": "7.6.3",
+    "semver": "7.7.0",
     "@graphprotocol/graph-cli": "0.95.0",
     "ejs": "3.1.10",
     "elliptic": "6.6.1",
@@ -1249,7 +1249,7 @@
 
     "secp256k1": ["secp256k1@4.0.4", "", { "dependencies": { "elliptic": "^6.5.7", "node-addon-api": "^5.0.0", "node-gyp-build": "^4.2.0" } }, "sha512-6JfvwvjUOn8F/jUoBY2Q1v5WY5XS+rj8qSe0v8Y4ezH4InLgTEeOOPQsRll9OV429Pvo6BCHGavIyJfr3TAhsw=="],
 
-    "semver": ["semver@7.6.3", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A=="],
+    "semver": ["semver@7.7.0", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-DrfFnPzblFmNrIZzg5RzHegbiRWg7KMR7btwi2yjHwx06zsUbO5g613sVwEV7FTwmzJu+Io0lJe2GJ3LxqpvBQ=="],
 
     "serialize-javascript": ["serialize-javascript@6.0.2", "", { "dependencies": { "randombytes": "^2.1.0" } }, "sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g=="],
 
