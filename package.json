@@ -50,7 +50,7 @@
     "@graphprotocol/graph-cli": "0.96.0",
     "@graphprotocol/graph-ts": "0.38.0",
     "elliptic": "6.6.1",
-    "ws": "8.18.0",
+    "ws": "8.18.1",
     "adm-zip": "0.5.16",
     "cross-spawn": "7.0.6",
     "semver": "7.7.1",
