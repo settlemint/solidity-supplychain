@@ -82,7 +82,7 @@ jobs:
           PAT_TOKEN: op://platform/github-commit-pat/credential
 
       - name: Checkout
-        uses: namespacelabs/nscloud-checkout-action@v5
+        uses: namespacelabs/nscloud-checkout-action@v6
         with:
           token: ${{ env.PAT_TOKEN }}
 
