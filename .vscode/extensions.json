@@ -1,10 +1,18 @@
 {
   "recommendations": [
     "nomicfoundation.hardhat-solidity",
-    "genieai.chatgpt-vscode",
     "esbenp.prettier-vscode",
     "cnshenj.vscode-task-manager",
     "catppuccin.catppuccin-vsc-icons",
-    "catppuccin.catppuccin-vsc"
+    "catppuccin.catppuccin-vsc",
+    "oven.bun-vscode",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "golang.go",
+    "graphql.vscode-graphql-syntax",
+    "yoavbls.pretty-ts-errors",
+    "rooveterinaryinc.roo-cline",
+    "bradlc.vscode-tailwindcss",
+    "shardulm94.trailing-spaces"
   ]
 }
