@@ -20,7 +20,7 @@ WORKDIR /usecase
 USER root
 
 RUN npm install
-RUN if [ -f "scripts/decompress.js" ]; then bun scripts/decompress.js; fi
+RUN if [ -f "scripts/decompress.js" ]; then node scripts/decompress.js; fi
 RUN forge build
 RUN npx hardhat compile
 
