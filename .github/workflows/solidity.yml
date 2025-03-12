@@ -65,7 +65,7 @@ jobs:
       foundry:
         image: ghcr.io/settlemint/btp-anvil-test-node:latest
         ports:
-          - '8545:8545'
+          - "8545:8545"
     name: Build Set
     #runs-on: ubuntu-latest
     runs-on: namespace-profile-btp-scs
@@ -101,10 +101,8 @@ jobs:
         with:
           node-version: 22
 
-      - uses: oven-sh/setup-bun@v2
-
       - name: Install Node dependencies
-        run: bun install
+        run: npm install
 
       - name: Run Forge build
         run: |
@@ -240,26 +238,26 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         uses: taoliujun/action-unique-comment@v1
         with:
-            uniqueIdentifier: ${{ github.workflow }}
-            body: |
-                # 📦 Packages
-                | Package | Install |
-                | ------- | -------------------- |
-                | React | `bun add @${{ github.repository_owner }}/${{ github.repository }}@${{ env.VERSION }}` |
+          uniqueIdentifier: ${{ github.workflow }}
+          body: |
+            # 📦 Packages
+            | Package | Install |
+            | ------- | -------------------- |
+            | Template Set | `bun add @${{ github.repository_owner }}/${{ github.repository }}@${{ env.VERSION }}` |
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         if: env.TAG == 'latest' && github.repository != 'settlemint/solidity-predeployed'
         with:
           commit_message: "chore: update package versions [skip ci]"
           branch: main
-          file_pattern: 'package.json README.md'
+          file_pattern: "package.json README.md"
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         if: env.TAG == 'latest' && github.repository == 'settlemint/solidity-predeployed'
         with:
           commit_message: "chore: update package versions [skip ci]"
           branch: main
-          file_pattern: 'package.json README.md all_allocations.json'
+          file_pattern: "package.json README.md all_allocations.json"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -304,7 +302,6 @@ jobs:
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           no-cache: true
-
 
       - name: Sign the images with GitHub OIDC Token
         env:

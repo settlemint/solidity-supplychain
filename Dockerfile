@@ -1,9 +1,5 @@
 FROM node:22.14.0 AS build
 
-COPY --from=oven/bun:1.2.5-debian --chmod=0777 /usr/local/bin/bun /bin/bun
-ENV BUN_RUNTIME_TRANSPILER_CACHE_PATH=0
-ENV BUN_INSTALL_BIN=/bin
-
 RUN --mount=type=cache,sharing=locked,target=/var/cache/apt \
   export DEBIAN_FRONTEND=noninteractive && \
   apt-get update && \
@@ -23,10 +19,10 @@ WORKDIR /usecase
 
 USER root
 
-RUN bun install --save-text-lockfile
+RUN npm install
 RUN if [ -f "scripts/decompress.js" ]; then bun scripts/decompress.js; fi
 RUN forge build
-RUN bun hardhat compile
+RUN npx hardhat compile
 
 FROM busybox:1.37.0
 
