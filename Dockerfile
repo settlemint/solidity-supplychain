@@ -21,6 +21,7 @@ USER root
 
 RUN npm install
 RUN if [ -f "scripts/decompress.js" ]; then node scripts/decompress.js; fi
+RUN if [ -f "soldeer.lock" ]; then forge soldeer update; fi
 RUN forge build
 RUN npx hardhat compile
 

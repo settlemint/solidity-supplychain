@@ -37,3 +37,6 @@ build
 
 .pnpm
 lcov.info
+
+# Soldeer
+/dependencies

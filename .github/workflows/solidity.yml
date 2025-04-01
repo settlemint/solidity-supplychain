@@ -104,6 +104,11 @@ jobs:
       - name: Install Node dependencies
         run: npm install
 
+      - name: Install Soldeer dependencies
+        if: github.repository == 'settlemint/solidity-account-abstraction'
+        run: |
+          forge soldeer update
+
       - name: Run Forge build
         run: |
           forge --version
