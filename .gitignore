@@ -38,7 +38,5 @@ lcov.info
 # Hardhat Ignition
 ignition/deployments/chain-*
 
-genesis-output.json
-
 # Soldeer
 /dependencies
