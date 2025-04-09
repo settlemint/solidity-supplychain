@@ -10,7 +10,7 @@
         "@nomicfoundation/hardhat-ignition-viem": "0.15.10",
         "@nomicfoundation/hardhat-toolbox-viem": "3.0.0",
         "@nomiclabs/hardhat-solhint": "4.0.1",
-        "@openzeppelin/contracts": "5.2.0",
+        "@openzeppelin/contracts": "5.3.0",
         "@openzeppelin/subgraphs": "0.1.8-5",
         "hardhat": "2.22.19",
         "solhint": "5.0.5",
@@ -257,7 +257,7 @@
 
     "@oclif/plugin-warn-if-update-available": ["@oclif/plugin-warn-if-update-available@3.1.28", "", { "dependencies": { "@oclif/core": "^4", "ansis": "^3.4.0", "debug": "^4.4.0", "http-call": "^5.2.2", "lodash": "^4.17.21", "registry-auth-token": "^5.0.3" } }, "sha512-15UI0yrzsodQLltntbUOmR7Nyd1tmUWzbcnR7QJvWMgEMuImNjqNdSaeXUFc3UBtaK266YatJYJWL5SCb/MTWw=="],
 
-    "@openzeppelin/contracts": ["@openzeppelin/contracts@5.2.0", "", {}, "sha512-bxjNie5z89W1Ea0NZLZluFh8PrFNn9DH8DQlujEok2yjsOlraUPKID5p1Wk3qdNbf6XkQ1Os2RvfiHrrXLHWKA=="],
+    "@openzeppelin/contracts": ["@openzeppelin/contracts@5.3.0", "", {}, "sha512-zj/KGoW7zxWUE8qOI++rUM18v+VeLTTzKs/DJFkSzHpQFPD/jKKF0TrMxBfGLl3kpdELCNccvB3zmofSzm4nlA=="],
 
     "@openzeppelin/subgraphs": ["@openzeppelin/subgraphs@0.1.8-5", "", { "dependencies": { "@amxx/graphprotocol-utils": "^1.1.0", "@openzeppelin/contracts": "^4.6.0" } }, "sha512-7k8x6A/lI33Dggah0S6Q+n348KaTBOUD7pK49K0lBSvCHZw5PqpMNZopfD/Kk+0nyFRzhAoPUU97RhmKz+YFJw=="],
 
