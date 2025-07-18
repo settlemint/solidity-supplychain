@@ -1,4 +1,4 @@
-FROM node:22.17.0 AS build
+FROM node:22.17.1 AS build
 
 RUN --mount=type=cache,sharing=locked,target=/var/cache/apt \
   export DEBIAN_FRONTEND=noninteractive && \
