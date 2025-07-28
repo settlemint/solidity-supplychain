@@ -250,14 +250,14 @@ jobs:
             | ------- | -------------------- |
             | Template Set | `bun add @${{ github.repository_owner }}/${{ github.repository }}@${{ env.VERSION }}` |
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v6
         if: env.TAG == 'latest' && github.repository != 'settlemint/solidity-predeployed'
         with:
           commit_message: "chore: update package versions [skip ci]"
           branch: main
           file_pattern: "package.json README.md"
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v6
         if: env.TAG == 'latest' && github.repository == 'settlemint/solidity-predeployed'
         with:
           commit_message: "chore: update package versions [skip ci]"
