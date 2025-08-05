@@ -33,51 +33,74 @@ abstract contract StdAssertions {
     event log_named_array(string key, int256[] val);
     event log_named_array(string key, address[] val);
 
+    bytes32 private constant FAILED_SLOT = bytes32("failed");
+
     bool private _failed;
 
     function failed() public view returns (bool) {
         if (_failed) {
-            return _failed;
+            return true;
         } else {
-            return vm.load(address(vm), bytes32("failed")) != bytes32(0);
+            return vm.load(address(vm), FAILED_SLOT) != bytes32(0);
         }
     }
 
     function fail() internal virtual {
-        vm.store(address(vm), bytes32("failed"), bytes32(uint256(1)));
+        vm.store(address(vm), FAILED_SLOT, bytes32(uint256(1)));
         _failed = true;
     }
 
+    function fail(string memory message) internal virtual {
+        fail();
+        vm.assertTrue(false, message);
+    }
+
     function assertTrue(bool data) internal pure virtual {
-        vm.assertTrue(data);
+        if (!data) {
+            vm.assertTrue(data);
+        }
     }
 
     function assertTrue(bool data, string memory err) internal pure virtual {
-        vm.assertTrue(data, err);
+        if (!data) {
+            vm.assertTrue(data, err);
+        }
     }
 
     function assertFalse(bool data) internal pure virtual {
-        vm.assertFalse(data);
+        if (data) {
+            vm.assertFalse(data);
+        }
     }
 
     function assertFalse(bool data, string memory err) internal pure virtual {
-        vm.assertFalse(data, err);
+        if (data) {
+            vm.assertFalse(data, err);
+        }
     }
 
     function assertEq(bool left, bool right) internal pure virtual {
-        vm.assertEq(left, right);
+        if (left != right) {
+            vm.assertEq(left, right);
+        }
     }
 
     function assertEq(bool left, bool right, string memory err) internal pure virtual {
-        vm.assertEq(left, right, err);
+        if (left != right) {
+            vm.assertEq(left, right, err);
+        }
     }
 
     function assertEq(uint256 left, uint256 right) internal pure virtual {
-        vm.assertEq(left, right);
+        if (left != right) {
+            vm.assertEq(left, right);
+        }
     }
 
     function assertEq(uint256 left, uint256 right, string memory err) internal pure virtual {
-        vm.assertEq(left, right, err);
+        if (left != right) {
+            vm.assertEq(left, right, err);
+        }
     }
 
     function assertEqDecimal(uint256 left, uint256 right, uint256 decimals) internal pure virtual {
@@ -89,11 +112,15 @@ abstract contract StdAssertions {
     }
 
     function assertEq(int256 left, int256 right) internal pure virtual {
-        vm.assertEq(left, right);
+        if (left != right) {
+            vm.assertEq(left, right);
+        }
     }
 
     function assertEq(int256 left, int256 right, string memory err) internal pure virtual {
-        vm.assertEq(left, right, err);
+        if (left != right) {
+            vm.assertEq(left, right, err);
+        }
     }
 
     function assertEqDecimal(int256 left, int256 right, uint256 decimals) internal pure virtual {
@@ -105,27 +132,39 @@ abstract contract StdAssertions {
     }
 
     function assertEq(address left, address right) internal pure virtual {
-        vm.assertEq(left, right);
+        if (left != right) {
+            vm.assertEq(left, right);
+        }
     }
 
     function assertEq(address left, address right, string memory err) internal pure virtual {
-        vm.assertEq(left, right, err);
+        if (left != right) {
+            vm.assertEq(left, right, err);
+        }
     }
 
     function assertEq(bytes32 left, bytes32 right) internal pure virtual {
-        vm.assertEq(left, right);
+        if (left != right) {
+            vm.assertEq(left, right);
+        }
     }
 
     function assertEq(bytes32 left, bytes32 right, string memory err) internal pure virtual {
-        vm.assertEq(left, right, err);
+        if (left != right) {
+            vm.assertEq(left, right, err);
+        }
     }
 
     function assertEq32(bytes32 left, bytes32 right) internal pure virtual {
-        assertEq(left, right);
+        if (left != right) {
+            vm.assertEq(left, right);
+        }
     }
 
     function assertEq32(bytes32 left, bytes32 right, string memory err) internal pure virtual {
-        assertEq(left, right, err);
+        if (left != right) {
+            vm.assertEq(left, right, err);
+        }
     }
 
     function assertEq(string memory left, string memory right) internal pure virtual {
@@ -206,19 +245,27 @@ abstract contract StdAssertions {
     }
 
     function assertNotEq(bool left, bool right) internal pure virtual {
-        vm.assertNotEq(left, right);
+        if (left == right) {
+            vm.assertNotEq(left, right);
+        }
     }
 
     function assertNotEq(bool left, bool right, string memory err) internal pure virtual {
-        vm.assertNotEq(left, right, err);
+        if (left == right) {
+            vm.assertNotEq(left, right, err);
+        }
     }
 
     function assertNotEq(uint256 left, uint256 right) internal pure virtual {
-        vm.assertNotEq(left, right);
+        if (left == right) {
+            vm.assertNotEq(left, right);
+        }
     }
 
     function assertNotEq(uint256 left, uint256 right, string memory err) internal pure virtual {
-        vm.assertNotEq(left, right, err);
+        if (left == right) {
+            vm.assertNotEq(left, right, err);
+        }
     }
 
     function assertNotEqDecimal(uint256 left, uint256 right, uint256 decimals) internal pure virtual {
@@ -234,11 +281,15 @@ abstract contract StdAssertions {
     }
 
     function assertNotEq(int256 left, int256 right) internal pure virtual {
-        vm.assertNotEq(left, right);
+        if (left == right) {
+            vm.assertNotEq(left, right);
+        }
     }
 
     function assertNotEq(int256 left, int256 right, string memory err) internal pure virtual {
-        vm.assertNotEq(left, right, err);
+        if (left == right) {
+            vm.assertNotEq(left, right, err);
+        }
     }
 
     function assertNotEqDecimal(int256 left, int256 right, uint256 decimals) internal pure virtual {
@@ -250,27 +301,39 @@ abstract contract StdAssertions {
     }
 
     function assertNotEq(address left, address right) internal pure virtual {
-        vm.assertNotEq(left, right);
+        if (left == right) {
+            vm.assertNotEq(left, right);
+        }
     }
 
     function assertNotEq(address left, address right, string memory err) internal pure virtual {
-        vm.assertNotEq(left, right, err);
+        if (left == right) {
+            vm.assertNotEq(left, right, err);
+        }
     }
 
     function assertNotEq(bytes32 left, bytes32 right) internal pure virtual {
-        vm.assertNotEq(left, right);
+        if (left == right) {
+            vm.assertNotEq(left, right);
+        }
     }
 
     function assertNotEq(bytes32 left, bytes32 right, string memory err) internal pure virtual {
-        vm.assertNotEq(left, right, err);
+        if (left == right) {
+            vm.assertNotEq(left, right, err);
+        }
     }
 
     function assertNotEq32(bytes32 left, bytes32 right) internal pure virtual {
-        assertNotEq(left, right);
+        if (left == right) {
+            vm.assertNotEq(left, right);
+        }
     }
 
     function assertNotEq32(bytes32 left, bytes32 right, string memory err) internal pure virtual {
-        assertNotEq(left, right, err);
+        if (left == right) {
+            vm.assertNotEq(left, right, err);
+        }
     }
 
     function assertNotEq(string memory left, string memory right) internal pure virtual {
@@ -346,11 +409,15 @@ abstract contract StdAssertions {
     }
 
     function assertLt(uint256 left, uint256 right) internal pure virtual {
-        vm.assertLt(left, right);
+        if (left >= right) {
+            vm.assertLt(left, right);
+        }
     }
 
     function assertLt(uint256 left, uint256 right, string memory err) internal pure virtual {
-        vm.assertLt(left, right, err);
+        if (left >= right) {
+            vm.assertLt(left, right, err);
+        }
     }
 
     function assertLtDecimal(uint256 left, uint256 right, uint256 decimals) internal pure virtual {
@@ -362,11 +429,15 @@ abstract contract StdAssertions {
     }
 
     function assertLt(int256 left, int256 right) internal pure virtual {
-        vm.assertLt(left, right);
+        if (left >= right) {
+            vm.assertLt(left, right);
+        }
     }
 
     function assertLt(int256 left, int256 right, string memory err) internal pure virtual {
-        vm.assertLt(left, right, err);
+        if (left >= right) {
+            vm.assertLt(left, right, err);
+        }
     }
 
     function assertLtDecimal(int256 left, int256 right, uint256 decimals) internal pure virtual {
@@ -378,11 +449,15 @@ abstract contract StdAssertions {
     }
 
     function assertGt(uint256 left, uint256 right) internal pure virtual {
-        vm.assertGt(left, right);
+        if (left <= right) {
+            vm.assertGt(left, right);
+        }
     }
 
     function assertGt(uint256 left, uint256 right, string memory err) internal pure virtual {
-        vm.assertGt(left, right, err);
+        if (left <= right) {
+            vm.assertGt(left, right, err);
+        }
     }
 
     function assertGtDecimal(uint256 left, uint256 right, uint256 decimals) internal pure virtual {
@@ -394,11 +469,15 @@ abstract contract StdAssertions {
     }
 
     function assertGt(int256 left, int256 right) internal pure virtual {
-        vm.assertGt(left, right);
+        if (left <= right) {
+            vm.assertGt(left, right);
+        }
     }
 
     function assertGt(int256 left, int256 right, string memory err) internal pure virtual {
-        vm.assertGt(left, right, err);
+        if (left <= right) {
+            vm.assertGt(left, right, err);
+        }
     }
 
     function assertGtDecimal(int256 left, int256 right, uint256 decimals) internal pure virtual {
@@ -410,11 +489,15 @@ abstract contract StdAssertions {
     }
 
     function assertLe(uint256 left, uint256 right) internal pure virtual {
-        vm.assertLe(left, right);
+        if (left > right) {
+            vm.assertLe(left, right);
+        }
     }
 
     function assertLe(uint256 left, uint256 right, string memory err) internal pure virtual {
-        vm.assertLe(left, right, err);
+        if (left > right) {
+            vm.assertLe(left, right, err);
+        }
     }
 
     function assertLeDecimal(uint256 left, uint256 right, uint256 decimals) internal pure virtual {
@@ -426,11 +509,15 @@ abstract contract StdAssertions {
     }
 
     function assertLe(int256 left, int256 right) internal pure virtual {
-        vm.assertLe(left, right);
+        if (left > right) {
+            vm.assertLe(left, right);
+        }
     }
 
     function assertLe(int256 left, int256 right, string memory err) internal pure virtual {
-        vm.assertLe(left, right, err);
+        if (left > right) {
+            vm.assertLe(left, right, err);
+        }
     }
 
     function assertLeDecimal(int256 left, int256 right, uint256 decimals) internal pure virtual {
@@ -442,11 +529,15 @@ abstract contract StdAssertions {
     }
 
     function assertGe(uint256 left, uint256 right) internal pure virtual {
-        vm.assertGe(left, right);
+        if (left < right) {
+            vm.assertGe(left, right);
+        }
     }
 
     function assertGe(uint256 left, uint256 right, string memory err) internal pure virtual {
-        vm.assertGe(left, right, err);
+        if (left < right) {
+            vm.assertGe(left, right, err);
+        }
     }
 
     function assertGeDecimal(uint256 left, uint256 right, uint256 decimals) internal pure virtual {
@@ -458,11 +549,15 @@ abstract contract StdAssertions {
     }
 
     function assertGe(int256 left, int256 right) internal pure virtual {
-        vm.assertGe(left, right);
+        if (left < right) {
+            vm.assertGe(left, right);
+        }
     }
 
     function assertGe(int256 left, int256 right, string memory err) internal pure virtual {
-        vm.assertGe(left, right, err);
+        if (left < right) {
+            vm.assertGe(left, right, err);
+        }
     }
 
     function assertGeDecimal(int256 left, int256 right, uint256 decimals) internal pure virtual {

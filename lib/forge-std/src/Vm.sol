@@ -185,6 +185,18 @@ interface VmSafe {
         uint256 chainId;
     }
 
+    /// Information about a blockchain.
+    struct Chain {
+        // The chain name.
+        string name;
+        // The chain's Chain ID.
+        uint256 chainId;
+        // The chain's alias. (i.e. what gets specified in `foundry.toml`).
+        string chainAlias;
+        // A default RPC endpoint for this chain.
+        string rpcUrl;
+    }
+
     /// The result of a `stopAndReturnStateDiff` call.
     struct AccountAccess {
         // The chain and fork the access occurred.
@@ -638,6 +650,10 @@ interface VmSafe {
     /// Get the nonce of a `Wallet`.
     function getNonce(Wallet calldata wallet) external returns (uint64 nonce);
 
+    /// Gets the RLP encoded block header for a given block number.
+    /// Returns the block header in the same format as `cast block <block_number> --raw`.
+    function getRawBlockHeader(uint256 blockNumber) external view returns (bytes memory rlpHeader);
+
     /// Gets all the recorded logs.
     function getRecordedLogs() external returns (Log[] memory logs);
 
@@ -656,7 +672,8 @@ interface VmSafe {
     /// Pauses gas metering (i.e. gas usage is not counted). Noop if already paused.
     function pauseGasMetering() external;
 
-    /// Records all storage reads and writes.
+    /// Records all storage reads and writes. Use `accesses` to get the recorded data.
+    /// Subsequent calls to `record` will clear the previous data.
     function record() external;
 
     /// Record all the transaction logs.
@@ -694,6 +711,9 @@ interface VmSafe {
 
     /// Stops recording all map SSTOREs for later retrieval and clears the recorded data.
     function stopMappingRecording() external;
+
+    /// Stops recording storage reads and writes.
+    function stopRecord() external;
 
     // ======== Filesystem ========
 
@@ -1099,8 +1119,14 @@ interface VmSafe {
 
     // ======== Scripting ========
 
+    /// Attach an EIP-4844 blob to the next call
+    function attachBlob(bytes calldata blob) external;
+
     /// Designate the next call as an EIP-7702 transaction
     function attachDelegation(SignedDelegation calldata signedDelegation) external;
+
+    /// Designate the next call as an EIP-7702 transaction, with optional cross-chain validity.
+    function attachDelegation(SignedDelegation calldata signedDelegation, bool crossChain) external;
 
     /// Takes a signed transaction and broadcasts it to the network.
     function broadcastRawTransaction(bytes calldata data) external;
@@ -1133,6 +1159,11 @@ interface VmSafe {
         external
         returns (SignedDelegation memory signedDelegation);
 
+    /// Sign an EIP-7702 authorization and designate the next call as an EIP-7702 transaction, with optional cross-chain validity.
+    function signAndAttachDelegation(address implementation, uint256 privateKey, bool crossChain)
+        external
+        returns (SignedDelegation memory signedDelegation);
+
     /// Sign an EIP-7702 authorization for delegation
     function signDelegation(address implementation, uint256 privateKey)
         external
@@ -1140,6 +1171,11 @@ interface VmSafe {
 
     /// Sign an EIP-7702 authorization for delegation for specific nonce
     function signDelegation(address implementation, uint256 privateKey, uint64 nonce)
+        external
+        returns (SignedDelegation memory signedDelegation);
+
+    /// Sign an EIP-7702 authorization for delegation, with optional cross-chain validity.
+    function signDelegation(address implementation, uint256 privateKey, bool crossChain)
         external
         returns (SignedDelegation memory signedDelegation);
 
@@ -1689,6 +1725,12 @@ interface VmSafe {
     /// `if (foundryVersionCmp("1.0.0") >= 0) { ... }`
     function foundryVersionCmp(string calldata version) external view returns (int256);
 
+    /// Returns a Chain struct for specific alias
+    function getChain(string calldata chainAlias) external view returns (Chain memory chain);
+
+    /// Returns a Chain struct for specific chainId
+    function getChain(uint256 chainId) external view returns (Chain memory chain);
+
     /// Returns the Foundry version.
     /// Format: <cargo_version>-<tag>+<git_sha_short>.<unix_build_timestamp>.<profile>
     /// Sample output: 0.3.0-nightly+3cb96bde9b.1737036656.debug
@@ -1813,6 +1855,53 @@ interface VmSafe {
     /// Utility cheatcode to copy storage of `from` contract to another `to` contract.
     function copyStorage(address from, address to) external;
 
+    /// Generates the struct hash of the canonical EIP-712 type representation and its abi-encoded data.
+    /// Supports 2 different inputs:
+    /// 1. Name of the type (i.e. "PermitSingle"):
+    /// * requires previous binding generation with `forge bind-json`.
+    /// * bindings will be retrieved from the path configured in `foundry.toml`.
+    /// 2. String representation of the type (i.e. "Foo(Bar bar) Bar(uint256 baz)").
+    /// * Note: the cheatcode will use the canonical type even if the input is malformated
+    /// with the wrong order of elements or with extra whitespaces.
+    function eip712HashStruct(string calldata typeNameOrDefinition, bytes calldata abiEncodedData)
+        external
+        pure
+        returns (bytes32 typeHash);
+
+    /// Generates the struct hash of the canonical EIP-712 type representation and its abi-encoded data.
+    /// Requires previous binding generation with `forge bind-json`.
+    /// Params:
+    /// * `bindingsPath`: path where the output of `forge bind-json` is stored.
+    /// * `typeName`: Name of the type (i.e. "PermitSingle").
+    /// * `abiEncodedData`: ABI-encoded data for the struct that is being hashed.
+    function eip712HashStruct(string calldata bindingsPath, string calldata typeName, bytes calldata abiEncodedData)
+        external
+        pure
+        returns (bytes32 typeHash);
+
+    /// Generates the hash of the canonical EIP-712 type representation.
+    /// Supports 2 different inputs:
+    /// 1. Name of the type (i.e. "Transaction"):
+    /// * requires previous binding generation with `forge bind-json`.
+    /// * bindings will be retrieved from the path configured in `foundry.toml`.
+    /// 2. String representation of the type (i.e. "Foo(Bar bar) Bar(uint256 baz)").
+    /// * Note: the cheatcode will output the canonical type even if the input is malformated
+    /// with the wrong order of elements or with extra whitespaces.
+    function eip712HashType(string calldata typeNameOrDefinition) external pure returns (bytes32 typeHash);
+
+    /// Generates the hash of the canonical EIP-712 type representation.
+    /// Requires previous binding generation with `forge bind-json`.
+    /// Params:
+    /// * `bindingsPath`: path where the output of `forge bind-json` is stored.
+    /// * `typeName`: Name of the type (i.e. "Transaction").
+    function eip712HashType(string calldata bindingsPath, string calldata typeName)
+        external
+        pure
+        returns (bytes32 typeHash);
+
+    /// Generates a ready-to-sign digest of human-readable typed data following the EIP-712 standard.
+    function eip712HashTypedData(string calldata jsonData) external pure returns (bytes32 digest);
+
     /// Returns ENS namehash for provided string.
     function ensNamehash(string calldata name) external pure returns (bytes32);
 
@@ -1827,7 +1916,7 @@ interface VmSafe {
     function pauseTracing() external view;
 
     /// Returns a random `address`.
-    function randomAddress() external returns (address);
+    function randomAddress() external view returns (address);
 
     /// Returns a random `bool`.
     function randomBool() external view returns (bool);
@@ -1848,10 +1937,10 @@ interface VmSafe {
     function randomInt(uint256 bits) external view returns (int256);
 
     /// Returns a random uint256 value.
-    function randomUint() external returns (uint256);
+    function randomUint() external view returns (uint256);
 
     /// Returns random uint256 value between the provided range (=min..=max).
-    function randomUint(uint256 min, uint256 max) external returns (uint256);
+    function randomUint(uint256 min, uint256 max) external view returns (uint256);
 
     /// Returns a random `uint256` value of given bits.
     function randomUint(uint256 bits) external view returns (uint256);
@@ -1865,6 +1954,9 @@ interface VmSafe {
     /// Utility cheatcode to set arbitrary storage for given target address and overwrite
     /// any storage slots that have been previously set.
     function setArbitraryStorage(address target, bool overwrite) external;
+
+    /// Set RNG seed.
+    function setSeed(uint256 seed) external;
 
     /// Randomly shuffles an array.
     function shuffle(uint256[] calldata array) external returns (uint256[] memory);
@@ -2362,4 +2454,15 @@ interface Vm is VmSafe {
 
     /// Stops all safe memory expectation in the current subcontext.
     function stopExpectSafeMemory() external;
+
+    // ======== Utilities ========
+
+    /// Causes the next contract creation (via new) to fail and return its initcode in the returndata buffer.
+    /// This allows type-safe access to the initcode payload that would be used for contract creation.
+    /// Example usage:
+    /// vm.interceptInitcode();
+    /// bytes memory initcode;
+    /// try new MyContract(param1, param2) { assert(false); }
+    /// catch (bytes memory interceptedInitcode) { initcode = interceptedInitcode; }
+    function interceptInitcode() external;
 }
