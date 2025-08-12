@@ -43,7 +43,7 @@
     "@nomiclabs/hardhat-solhint": "4.1.0",
     "@openzeppelin/contracts": "5.4.0",
     "@openzeppelin/subgraphs": "0.1.8-5",
-    "hardhat": "2.26.2",
+    "hardhat": "2.26.3",
     "solhint": "6.0.0"
   },
   "overrides": {
