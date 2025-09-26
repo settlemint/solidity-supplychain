@@ -71,12 +71,12 @@ jobs:
     runs-on: namespace-profile-btp-scs
     steps:
       - name: Setup 1Password
-        uses: 1password/load-secrets-action/configure@v2
+        uses: 1password/load-secrets-action/configure@v3
         with:
           service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 
       - name: Load secrets
-        uses: 1password/load-secrets-action@v2
+        uses: 1password/load-secrets-action@v3
         env:
           NPM_TOKEN: op://platform/npmjs/credential
           PAT_TOKEN: op://platform/github-commit-pat/credential
