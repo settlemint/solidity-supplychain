@@ -230,7 +230,7 @@ jobs:
             echo "\`\`\`" >> README.md
           fi
 
-      - uses: JS-DevTools/npm-publish@v3
+      - uses: JS-DevTools/npm-publish@v4
         with:
           token: ${{ env.NPM_TOKEN }}
           package: ./package.json
