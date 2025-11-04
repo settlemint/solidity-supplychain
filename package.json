@@ -1,7 +1,7 @@
 {
   "name": "@settlemint/solidity-supplychain",
   "description": "Smart contract set to build a supplychain usecase in SettleMint",
-  "version": "8.0.10",
+  "version": "8.0.11",
   "private": false,
   "license": "FSL-1.1-MIT",
   "author": {
