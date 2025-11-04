@@ -71,12 +71,12 @@ jobs:
     runs-on: namespace-profile-btp-scs
     steps:
       - name: Setup 1Password
-        uses: 1password/load-secrets-action/configure@v2
+        uses: 1password/load-secrets-action/configure@v3
         with:
           service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 
       - name: Load secrets
-        uses: 1password/load-secrets-action@v2
+        uses: 1password/load-secrets-action@v3
         env:
           NPM_TOKEN: op://platform/npmjs/credential
           PAT_TOKEN: op://platform/github-commit-pat/credential
@@ -97,9 +97,9 @@ jobs:
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22.21.1
+          node-version: 24.11.0
 
       - name: Install Node dependencies
         run: npm install
@@ -230,7 +230,7 @@ jobs:
             echo "\`\`\`" >> README.md
           fi
 
-      - uses: JS-DevTools/npm-publish@v3
+      - uses: JS-DevTools/npm-publish@v4
         with:
           token: ${{ env.NPM_TOKEN }}
           package: ./package.json
@@ -250,14 +250,14 @@ jobs:
             | ------- | -------------------- |
             | Template Set | `bun add @${{ github.repository_owner }}/${{ github.repository }}@${{ env.VERSION }}` |
 
-      - uses: stefanzweifel/git-auto-commit-action@v6
+      - uses: stefanzweifel/git-auto-commit-action@v7
         if: env.TAG == 'latest' && github.repository != 'settlemint/solidity-predeployed'
         with:
           commit_message: "chore: update package versions [skip ci]"
           branch: main
           file_pattern: "package.json README.md"
 
-      - uses: stefanzweifel/git-auto-commit-action@v6
+      - uses: stefanzweifel/git-auto-commit-action@v7
         if: env.TAG == 'latest' && github.repository == 'settlemint/solidity-predeployed'
         with:
           commit_message: "chore: update package versions [skip ci]"
