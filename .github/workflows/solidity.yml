@@ -77,6 +77,8 @@ jobs:
 
       - name: Load secrets
         uses: 1password/load-secrets-action@v3
+        with:
+          export-env: true
         env:
           NPM_TOKEN: op://platform/npmjs/credential
           PAT_TOKEN: op://platform/github-commit-pat/credential
