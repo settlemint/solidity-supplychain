@@ -13,7 +13,7 @@
         "@nomiclabs/hardhat-solhint": "4.1.0",
         "@openzeppelin/contracts": "5.4.0",
         "@openzeppelin/subgraphs": "0.1.8-5",
-        "hardhat": "2.26.5",
+        "hardhat": "2.27.0",
         "solhint": "6.0.1",
       },
     },
@@ -175,21 +175,21 @@
 
     "@nodelib/fs.walk": ["@nodelib/fs.walk@1.2.8", "", { "dependencies": { "@nodelib/fs.scandir": "2.1.5", "fastq": "^1.6.0" } }, "sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg=="],
 
-    "@nomicfoundation/edr": ["@nomicfoundation/edr@0.11.3", "", { "dependencies": { "@nomicfoundation/edr-darwin-arm64": "0.11.3", "@nomicfoundation/edr-darwin-x64": "0.11.3", "@nomicfoundation/edr-linux-arm64-gnu": "0.11.3", "@nomicfoundation/edr-linux-arm64-musl": "0.11.3", "@nomicfoundation/edr-linux-x64-gnu": "0.11.3", "@nomicfoundation/edr-linux-x64-musl": "0.11.3", "@nomicfoundation/edr-win32-x64-msvc": "0.11.3" } }, "sha512-kqILRkAd455Sd6v8mfP3C1/0tCOynJWY+Ir+k/9Boocu2kObCrsFgG+ZWB7fSBVdd9cPVSNrnhWS+V+PEo637g=="],
+    "@nomicfoundation/edr": ["@nomicfoundation/edr@0.12.0-next.14", "", { "dependencies": { "@nomicfoundation/edr-darwin-arm64": "0.12.0-next.14", "@nomicfoundation/edr-darwin-x64": "0.12.0-next.14", "@nomicfoundation/edr-linux-arm64-gnu": "0.12.0-next.14", "@nomicfoundation/edr-linux-arm64-musl": "0.12.0-next.14", "@nomicfoundation/edr-linux-x64-gnu": "0.12.0-next.14", "@nomicfoundation/edr-linux-x64-musl": "0.12.0-next.14", "@nomicfoundation/edr-win32-x64-msvc": "0.12.0-next.14" } }, "sha512-MGHY2x7JaNdkqlQxFBYoM7Miw2EqsQrI3ReVZMwLP5mULSRTAOnt3hCw6cnjXxGi991HnejNAedJofke6OdqqA=="],
 
-    "@nomicfoundation/edr-darwin-arm64": ["@nomicfoundation/edr-darwin-arm64@0.11.3", "", {}, "sha512-w0tksbdtSxz9nuzHKsfx4c2mwaD0+l5qKL2R290QdnN9gi9AV62p9DHkOgfBdyg6/a6ZlnQqnISi7C9avk/6VA=="],
+    "@nomicfoundation/edr-darwin-arm64": ["@nomicfoundation/edr-darwin-arm64@0.12.0-next.14", "", {}, "sha512-sl0DibKSUOS7JXhUtaQ6FJUY+nk+uq5gx+Fyd9iiqs8awZPNn6KSuvV1EbWCi+yd3mrxgZ/wO8E77C1Dxj4xQA=="],
 
-    "@nomicfoundation/edr-darwin-x64": ["@nomicfoundation/edr-darwin-x64@0.11.3", "", {}, "sha512-QR4jAFrPbOcrO7O2z2ESg+eUeIZPe2bPIlQYgiJ04ltbSGW27FblOzdd5+S3RoOD/dsZGKAvvy6dadBEl0NgoA=="],
+    "@nomicfoundation/edr-darwin-x64": ["@nomicfoundation/edr-darwin-x64@0.12.0-next.14", "", {}, "sha512-lfmatc1MSOaw0rDFB+ynnAGz5TWm3hSeY/+zDpPZghMODZelXm4JCqF41CQ6paLsW3X/pXcHM1HUGCUBWeoI/A=="],
 
-    "@nomicfoundation/edr-linux-arm64-gnu": ["@nomicfoundation/edr-linux-arm64-gnu@0.11.3", "", {}, "sha512-Ktjv89RZZiUmOFPspuSBVJ61mBZQ2+HuLmV67InNlh9TSUec/iDjGIwAn59dx0bF/LOSrM7qg5od3KKac4LJDQ=="],
+    "@nomicfoundation/edr-linux-arm64-gnu": ["@nomicfoundation/edr-linux-arm64-gnu@0.12.0-next.14", "", {}, "sha512-sWun3PhVgat8d4lg1d5MAXSIsFlSMBzvrpMSDFNOU9hPJEclSHbHBMRcarQuGqwm/5ZBzTwCS25u78A+UATTrg=="],
 
-    "@nomicfoundation/edr-linux-arm64-musl": ["@nomicfoundation/edr-linux-arm64-musl@0.11.3", "", {}, "sha512-B3sLJx1rL2E9pfdD4mApiwOZSrX0a/KQSBWdlq1uAhFKqkl00yZaY4LejgZndsJAa4iKGQJlGnw4HCGeVt0+jA=="],
+    "@nomicfoundation/edr-linux-arm64-musl": ["@nomicfoundation/edr-linux-arm64-musl@0.12.0-next.14", "", {}, "sha512-omWKioD8fFp7ayCeSDu2CqvG78+oYw8zdVECDwZVmE0jpszRCsTufNYflWRQnlGqH6GqjEUwq2c3yLxFgOTjFg=="],
 
-    "@nomicfoundation/edr-linux-x64-gnu": ["@nomicfoundation/edr-linux-x64-gnu@0.11.3", "", {}, "sha512-D/4cFKDXH6UYyKPu6J3Y8TzW11UzeQI0+wS9QcJzjlrrfKj0ENW7g9VihD1O2FvXkdkTjcCZYb6ai8MMTCsaVw=="],
+    "@nomicfoundation/edr-linux-x64-gnu": ["@nomicfoundation/edr-linux-x64-gnu@0.12.0-next.14", "", {}, "sha512-vk0s4SaC7s1wa98W24a4zqunTK/yIcSEnsSLRM/Nl+JJs6iqS8tvmnh/BbFINORMBJ065OWc10qw2Lsbu/rxtg=="],
 
-    "@nomicfoundation/edr-linux-x64-musl": ["@nomicfoundation/edr-linux-x64-musl@0.11.3", "", {}, "sha512-ergXuIb4nIvmf+TqyiDX5tsE49311DrBky6+jNLgsGDTBaN1GS3OFwFS8I6Ri/GGn6xOaT8sKu3q7/m+WdlFzg=="],
+    "@nomicfoundation/edr-linux-x64-musl": ["@nomicfoundation/edr-linux-x64-musl@0.12.0-next.14", "", {}, "sha512-/xKQD6c2RXQBIb30iTeh/NrMdYvHs6Nd+2UXS6wxlfX7GzRPOkpVDiDGD7Sda82JI459KH67dADOD6CpX8cpHQ=="],
 
-    "@nomicfoundation/edr-win32-x64-msvc": ["@nomicfoundation/edr-win32-x64-msvc@0.11.3", "", {}, "sha512-snvEf+WB3OV0wj2A7kQ+ZQqBquMcrozSLXcdnMdEl7Tmn+KDCbmFKBt3Tk0X3qOU4RKQpLPnTxdM07TJNVtung=="],
+    "@nomicfoundation/edr-win32-x64-msvc": ["@nomicfoundation/edr-win32-x64-msvc@0.12.0-next.14", "", {}, "sha512-GZcyGdOoLWnUtfPU+6B1vUi4fwf3bouSRf3xuKFHz3p/WNhpDK+8Esq3UmOmYAZWRgFT0ZR6XUk9H2owGDTVvQ=="],
 
     "@nomicfoundation/hardhat-foundry": ["@nomicfoundation/hardhat-foundry@1.2.0", "", { "dependencies": { "picocolors": "^1.1.0" }, "peerDependencies": { "hardhat": "^2.26.0" } }, "sha512-2AJQLcWnUk/iQqHDVnyOadASKFQKF1PhNtt1cONEQqzUPK+fqME1IbP+EKu+RkZTRcyc4xqUMaB0sutglKRITg=="],
 
@@ -723,7 +723,7 @@
 
     "handlebars": ["handlebars@4.7.8", "", { "dependencies": { "minimist": "^1.2.5", "neo-async": "^2.6.2", "source-map": "^0.6.1", "wordwrap": "^1.0.0" }, "optionalDependencies": { "uglify-js": "^3.1.4" }, "bin": { "handlebars": "bin/handlebars" } }, "sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ=="],
 
-    "hardhat": ["hardhat@2.26.5", "", { "dependencies": { "@ethereumjs/util": "^9.1.0", "@ethersproject/abi": "^5.1.2", "@nomicfoundation/edr": "^0.11.3", "@nomicfoundation/solidity-analyzer": "^0.1.0", "@sentry/node": "^5.18.1", "adm-zip": "^0.4.16", "aggregate-error": "^3.0.0", "ansi-escapes": "^4.3.0", "boxen": "^5.1.2", "chokidar": "^4.0.0", "ci-info": "^2.0.0", "debug": "^4.1.1", "enquirer": "^2.3.0", "env-paths": "^2.2.0", "ethereum-cryptography": "^1.0.3", "find-up": "^5.0.0", "fp-ts": "1.19.3", "fs-extra": "^7.0.1", "immutable": "^4.0.0-rc.12", "io-ts": "1.10.4", "json-stream-stringify": "^3.1.4", "keccak": "^3.0.2", "lodash": "^4.17.11", "micro-eth-signer": "^0.14.0", "mnemonist": "^0.38.0", "mocha": "^10.0.0", "p-map": "^4.0.0", "picocolors": "^1.1.0", "raw-body": "^2.4.1", "resolve": "1.17.0", "semver": "^6.3.0", "solc": "0.8.26", "source-map-support": "^0.5.13", "stacktrace-parser": "^0.1.10", "tinyglobby": "^0.2.6", "tsort": "0.0.1", "undici": "^5.14.0", "uuid": "^8.3.2", "ws": "^7.4.6" }, "peerDependencies": { "ts-node": "*", "typescript": "*" }, "optionalPeers": ["ts-node", "typescript"], "bin": { "hardhat": "internal/cli/bootstrap.js" } }, "sha512-TvFKUPGRaoemeVpnKsXt5I+kVCNrzP2cLwyNUveu0JKf2Q0lzh6LTgVBsWyYPlXAwBzyUQ6fsL98UgyF/QdOfA=="],
+    "hardhat": ["hardhat@2.27.0", "", { "dependencies": { "@ethereumjs/util": "^9.1.0", "@ethersproject/abi": "^5.1.2", "@nomicfoundation/edr": "^0.12.0-next.7", "@nomicfoundation/solidity-analyzer": "^0.1.0", "@sentry/node": "^5.18.1", "adm-zip": "^0.4.16", "aggregate-error": "^3.0.0", "ansi-escapes": "^4.3.0", "boxen": "^5.1.2", "chokidar": "^4.0.0", "ci-info": "^2.0.0", "debug": "^4.1.1", "enquirer": "^2.3.0", "env-paths": "^2.2.0", "ethereum-cryptography": "^1.0.3", "find-up": "^5.0.0", "fp-ts": "1.19.3", "fs-extra": "^7.0.1", "immutable": "^4.0.0-rc.12", "io-ts": "1.10.4", "json-stream-stringify": "^3.1.4", "keccak": "^3.0.2", "lodash": "^4.17.11", "micro-eth-signer": "^0.14.0", "mnemonist": "^0.38.0", "mocha": "^10.0.0", "p-map": "^4.0.0", "picocolors": "^1.1.0", "raw-body": "^2.4.1", "resolve": "1.17.0", "semver": "^6.3.0", "solc": "0.8.26", "source-map-support": "^0.5.13", "stacktrace-parser": "^0.1.10", "tinyglobby": "^0.2.6", "tsort": "0.0.1", "undici": "^5.14.0", "uuid": "^8.3.2", "ws": "^7.4.6" }, "peerDependencies": { "ts-node": "*", "typescript": "*" }, "optionalPeers": ["ts-node", "typescript"], "bin": { "hardhat": "internal/cli/bootstrap.js" } }, "sha512-du7ecjx1/ueAUjvtZhVkJvWytPCjlagG3ZktYTphfzAbc1Flc6sRolw5mhKL/Loub1EIFRaflutM4bdB/YsUUw=="],
 
     "hardhat-gas-reporter": ["hardhat-gas-reporter@2.3.0", "", { "dependencies": { "@ethersproject/abi": "^5.7.0", "@ethersproject/bytes": "^5.7.0", "@ethersproject/units": "^5.7.0", "@solidity-parser/parser": "^0.20.1", "axios": "^1.6.7", "brotli-wasm": "^2.0.1", "chalk": "4.1.2", "cli-table3": "^0.6.3", "ethereum-cryptography": "^2.1.3", "glob": "^10.3.10", "jsonschema": "^1.4.1", "lodash": "^4.17.21", "markdown-table": "2.0.0", "sha1": "^1.1.1", "viem": "^2.27.0" }, "peerDependencies": { "hardhat": "^2.16.0" } }, "sha512-ySdA+044xMQv1BlJu5CYXToHzMexKFfIWxlQTBNNoerx1x96+d15IMdN01iQZ/TJ7NH2V5sU73bz77LoS/PEVw=="],
 
@@ -1538,6 +1538,8 @@
     "gluegun/enquirer": ["enquirer@2.3.6", "", { "dependencies": { "ansi-colors": "^4.1.1" } }, "sha512-yjNnPr315/FjS4zIsUxYguYUPP2e1NK4d7E7ZOLiyYCcbFBiTMyID+2wvm2w6+pZ/odMA7cRkjhsPbltwBOrLg=="],
 
     "gluegun/semver": ["semver@7.3.5", "", { "dependencies": { "lru-cache": "^6.0.0" }, "bin": { "semver": "bin/semver.js" } }, "sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ=="],
+
+    "hardhat/debug": ["debug@4.4.3", "", { "dependencies": { "ms": "^2.1.3" } }, "sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA=="],
 
     "hardhat/fs-extra": ["fs-extra@7.0.1", "", { "dependencies": { "graceful-fs": "^4.1.2", "jsonfile": "^4.0.0", "universalify": "^0.1.0" } }, "sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw=="],
 
