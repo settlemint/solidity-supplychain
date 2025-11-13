@@ -35,8 +35,8 @@
   ],
   "dependencies": {
     "@amxx/graphprotocol-utils": "1.2.0",
-    "@graphprotocol/graph-cli": "0.96.0",
-    "@graphprotocol/graph-ts": "0.38.0",
+    "@graphprotocol/graph-cli": "0.98.1",
+    "@graphprotocol/graph-ts": "0.38.2",
     "@nomicfoundation/hardhat-foundry": "1.2.0",
     "@nomicfoundation/hardhat-ignition-viem": "0.15.15",
     "@nomicfoundation/hardhat-toolbox-viem": "4.1.1",
@@ -47,8 +47,8 @@
     "solhint": "6.0.1"
   },
   "overrides": {
-    "@graphprotocol/graph-cli": "0.96.0",
-    "@graphprotocol/graph-ts": "0.38.0"
+    "@graphprotocol/graph-cli": "0.98.1",
+    "@graphprotocol/graph-ts": "0.38.2"
   },
   "trustedDependencies": [
     "keccak",
