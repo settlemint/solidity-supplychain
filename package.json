@@ -38,7 +38,7 @@
     "@graphprotocol/graph-cli": "0.96.0",
     "@graphprotocol/graph-ts": "0.38.0",
     "@nomicfoundation/hardhat-foundry": "1.2.0",
-    "@nomicfoundation/hardhat-ignition-viem": "0.15.15",
+    "@nomicfoundation/hardhat-ignition-viem": "0.15.16",
     "@nomicfoundation/hardhat-toolbox-viem": "4.1.1",
     "@nomiclabs/hardhat-solhint": "4.1.0",
     "@openzeppelin/contracts": "5.4.0",
