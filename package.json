@@ -37,13 +37,13 @@
     "@amxx/graphprotocol-utils": "1.2.0",
     "@graphprotocol/graph-cli": "0.96.0",
     "@graphprotocol/graph-ts": "0.38.0",
-    "@nomicfoundation/hardhat-foundry": "1.2.0",
-    "@nomicfoundation/hardhat-ignition-viem": "0.15.16",
-    "@nomicfoundation/hardhat-toolbox-viem": "4.1.1",
-    "@nomiclabs/hardhat-solhint": "4.1.0",
+    "@nomicfoundation/hardhat-foundry": "3.0.2",
+    "@nomicfoundation/hardhat-ignition-viem": "3.1.5",
+    "@nomicfoundation/hardhat-toolbox-viem": "5.0.5",
+    "@nomiclabs/hardhat-solhint": "5.0.0",
     "@openzeppelin/contracts": "5.4.0",
     "@openzeppelin/subgraphs": "0.1.8-5",
-    "hardhat": "2.27.1",
+    "hardhat": "3.4.5",
     "solhint": "6.0.1"
   },
   "overrides": {
